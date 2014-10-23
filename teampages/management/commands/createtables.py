@@ -121,6 +121,12 @@ class Command(BaseCommand):
                 f.write("<td >${salary}</td>\n".format(salary=player[2]))
                 f.write("</tr>\n")
             f.write("</tbody>\n")
+            f.write("<tfoot>\n")
+            f.write("<tr><td></td><td>Salary:</td><td>${salary}</td></tr>\n".format(salary=format(int(self.calculateSalary(roster)), ",d")))
+            f.write("<tr><td></td><td>Forwards:</td><td>{forwards}</td></tr>\n".format(forwards=len(roster["F"])))
+            f.write("<tr><td></td><td>Defence:</td><td>{defence}</td></tr>\n".format(defence=len(roster["D"])))
+            f.write("<tr><td></td><td>Goalies:</td><td>{goalies}</td></tr>\n".format(goalies=len(roster["G"])))
+            f.write("</tfoot>\n")
 
     def createLineup(self, lineup, team_name):        
         with open("teampages/templates/teampages/teams/lineups/"+team_name+".html", "w") as f:
@@ -153,6 +159,20 @@ class Command(BaseCommand):
                 f.write("<td >${salary}</td>\n".format(salary=player[2]))
                 f.write("</tr>\n")
             f.write("</tbody>\n")
+            f.write("<tfoot>\n")
+            f.write("<tr><td></td><td>Salary:</td><td>${salary}</td></tr>\n".format(salary=format(int(self.calculateSalary(lineup)), ",d")))
+            f.write("<tr><td></td><td>Forwards:</td><td>{forwards}</td></tr>\n".format(forwards=len(lineup["F"])))
+            f.write("<tr><td></td><td>Defence:</td><td>{defence}</td></tr>\n".format(defence=len(lineup["D"])))
+            f.write("<tr><td></td><td>Goalies:</td><td>{goalies}</td></tr>\n".format(goalies=len(lineup["G"])))
+            f.write("</tfoot>\n")
+
+
+    def calculateSalary(self, players):
+        salary = 0
+        for position, players in players.iteritems():
+            for player in players:
+                salary += float(player[2].replace(",", ""))
+        return salary
 
 
 
