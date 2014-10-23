@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<title>The Keeper Pool</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/bootstrap/css/bootstrap.min.css' %}">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'teampages/bootstrap/js/bootstrap.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/team.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/base.css' %}">
+</head>
+<body>
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          	<div class="navbar-header">
+	            <a class="navbar-brand" href="/">The Keeper Pool</a>          		
+          	</div>
+            <li class="disabled"><a href="">Rules</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+              	{% for team in teams %}
+                <li><a href="/teams/{{team.name}}">{{team.name}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <div class="container"> 
+    	<div class="page-header">
+    		<h1>{{team.name}}'s Team</h1>
+    	</div>
+    	<div class="row">
+    		<div class="col-md-5">
+    			<h3>Roster</h3>
+    			<table class="table">
+					<thead>
+						<tr>
+							<th class="col-md-1">Position</th>
+							<th class="col-md-2">Player</th>
+							<th class="col-md-2">Salary</th>
+							</tr>
+						</thead>
+				{% include roster_template %}
+    			</table>
+			</div>
+			<div class="col-md-1">
+			</div>
+			<div class="col-md-5">
+    			<h3>Lineup</h3>
+    			<table class="table">
+					<thead>
+						<tr>
+							<th class="col-md-1">Position</th>
+							<th class="col-md-2">Player</th>
+							<th class="col-md-2">Salary</th>
+							</tr>
+						</thead>
+				{% include lineup_template %}
+    			</table>
+			</div>
+    	</div>
+    </div>
+    <footer class="row">
+    <div class="panel-footer text-center">
+		<p><span class="glyphicon glyphicon-copyright-mark grey"></span> Ben Miller - 2014</p>
+    </div>
+  </footer>
+
+</body>
+</html>

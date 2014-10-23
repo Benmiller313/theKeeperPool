@@ -1,0 +1,73 @@
+[
+	{
+		"model": "teampages.Team",
+		"pk":1,
+		"fields":{
+			"name":"Ben",
+			"mascot_image" : "keith.jpg" 
+		}
+	},
+
+	{
+		"model": "teampages.Team",
+		"pk":2,
+		"fields":{
+			"name":"Andrew",
+			"mascot_image" : "kesselusa.jpg"
+		}
+	},
+
+	{
+		"model": "teampages.Team",
+		"pk":3,
+		"fields":{
+			"name":"Evan",
+			"mascot_image" : "giordano.jpg"
+		}
+	},
+
+	{
+		"model": "teampages.Team",
+		"pk":4,
+		"fields":{
+			"name":"Graham",
+			"mascot_image" : "dsedin.png"
+		}
+	},
+
+	{
+		"model": "teampages.Team",
+		"pk":5,
+		"fields":{
+			"name":"Matt",
+			"mascot_image" : "stamkos.jpg"
+		}
+	},
+
+	{
+		"model": "teampages.Team",
+		"pk":6,
+		"fields":{
+			"name":"Nick",
+			"mascot_image" : "lundqvist.jpg"
+		}
+	},
+
+	{
+		"model": "teampages.Team",
+		"pk":7,
+		"fields":{
+			"name":"Sam",
+			"mascot_image" : "bouwmeester.jpg"
+		}
+	},
+
+	{
+		"model": "teampages.Team",
+		"pk":8,
+		"fields":{
+			"name":"Tyler",
+			"mascot_image" : "tavares.jpg"
+		}
+	}
+]

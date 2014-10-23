@@ -1,0 +1,26 @@
+/*
+.navbar-default { 
+	background-color: #DD1414;	
+}
+
+.navbar-default .navbar-brand {
+	color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: #fff;
+} */
+
+.table > tbody > tr > td.position-cell { 
+	vertical-align: middle;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+.table > tbody { 
+	border: 1px solid #ddd;
+}
+
+.table .half-width { 
+	width : 60px;
+}
