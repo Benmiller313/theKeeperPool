@@ -49,3 +49,10 @@
 #main-content > .container > .row > div { 
   text-align: center;
 }
+
+@media (max-width: 768px) {
+#heading h4{
+  display: none; 
+
+}
+}
