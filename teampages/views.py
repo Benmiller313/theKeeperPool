@@ -23,3 +23,7 @@ def teampage(request, team_name):
 		"lineup_template": lineup_template,
 	}
 	return render_to_response("teampages/teampage.html", context)
+
+def rules(request):
+
+	return render_to_response("teampages/rules.html")

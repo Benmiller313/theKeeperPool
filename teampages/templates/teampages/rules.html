@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<title>The Keeper Pool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/bootstrap/css/bootstrap.min.css' %}">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'teampages/bootstrap/js/bootstrap.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/home.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'teampages/css/base.css' %}">
+
+</head>
+
+<body>
+	<nav class="navbar navbar-default" role="navigation">
+    <div class="container">      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">The Keeper Pool</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="/rules/">Rules</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              {% for team in teams %}
+                <li><a href="/teams/{{team.name}}">{{team.name}}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div class="container" id="rules-body">
+
+
+		By Jordan Ray
+		<ol>
+			<li><span style="font-family:Arial, serif;">Drafts</span>
+		<ol type="a">
+			<li><span style="font-family:Arial, serif;">There shall be an opening draft to open the first year of the pool, where all current NHL players would be available for selection. The order of the first round shall be determined randomly, and the consecutive rounds of the draft shall follow a “snake order” (i.e. 1</span><sup><span style="font-family:Arial, serif;">st</span></sup><span style="font-family:Arial, serif;"> team in first round picks last in the 2</span><sup><span style="font-family:Arial, serif;">nd</span></sup><span style="font-family:Arial, serif;"> round, but 1</span><sup><span style="font-family:Arial, serif;">st</span></sup><span style="font-family:Arial, serif;"> in the 3</span><sup><span style="font-family:Arial, serif;">rd</span></sup><span style="font-family:Arial, serif;"> round)</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">The draft continues until each GM has filled the minimum overall roster requirements of 13 forwards, 6 defencemen and 3 goalies for their team</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">From the second year of the keeper pool, the draft order shall be determined according to the amount of prize money that each GM obtained in the previous season, with the GM who won the least amount of prize money picking 1</span><sup><span style="font-family:Arial, serif;">st</span></sup><span style="font-family:Arial, serif;">, the 2</span><sup><span style="font-family:Arial, serif;">nd</span></sup><span style="font-family:Arial, serif;"> least picking 2</span><sup><span style="font-family:Arial, serif;">nd</span></sup><span style="font-family:Arial, serif;">, etc.</span></li>
+			<li><span style="font-family:Arial, serif;">No snake order, the order set in the first round continues to the second round (least amount of prize money picks first in the 2</span><sup><span style="font-family:Arial, serif;">nd</span></sup><span style="font-family:Arial, serif;"> round, 3</span><sup><span style="font-family:Arial, serif;">rd</span></sup><span style="font-family:Arial, serif;"> round, and so on)</span></li>
+			<li><span style="font-family:Arial, serif;">Players eligible for this “keeper draft” include all current players that have been drafted by an NHL team, including both those selected in the NHL Entry Draft of that year, and all NHL players not owned by any GMs at the time of the keeper draft</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">A free agent selected during the keeper draft </span><span style="font-family:Arial, serif;"><em>does not</em></span><span style="font-family:Arial, serif;"> incur a $5.00 (or $2.50) fee</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">The keeper draft shall continue seven rounds.</span></li>
+			<li><span style="font-family:Arial, serif;">Following the keeper draft, it will likely be the case that GMs will have extra players and/or salary. They may continue to hold these players as assets until the first game of the regular season. At that time, GMs must drop excess players (at no cost to them) into free agency until their roster conforms to the requirements set out in Section (2).</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Roster:</span>
+		<ol type="a">
+			<li><span style="font-family:Arial, serif;">Skaters</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">Each GM will be allowed to have 9 forwards and 4 defencemen contributing to their score every night</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Goalies</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">Each GM will be allowed to have 2 goalies contributing to their score every night</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Benched players</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">In addition to the 9 forwards, 4 defencemen and 2 goalies that will be contributing members of a GM’s roster every game they play, a GM shall also have a minimum of 4 forwards, 2 defencemen and 1 goalie to make up his “bench”</span></li>
+			<li><span style="font-family:Arial, serif;">The standard bench size that every GM is allowed to fill is 6 forwards, 3 defencemen and 2 goalies.</span></li>
+			<li><span style="font-family:Arial, serif;">Benched players do not contribute to the day-to-day points of a GM’s team</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Determining “active” players</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">Every Sunday night by 12 am Eastern Time, every GM must submit the roster of 9 forwards, 4 defencemen and 2 goalies that they wish to be “active” players for that week</span></li>
+			<li><span style="font-family:Arial, serif;">If no roster is submitted, the roster of “active” players that the GM submitted the previous week will be used instead</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Overall roster</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">A GM’s team </span><span style="font-family:Arial, serif;"><span style="text-decoration:underline;">must have at all times</span></span><span style="font-family:Arial, serif;"> a minimum overall roster of 13 forwards (9 active and 4 benched), 6 defencemen (4 active and two benched), and 3 goalies (2 active and one benched)</span></li>
+			<li><span style="font-family:Arial, serif;">A GM may decide to expand the amount of players on his/her bench beyond the regular 6 forwards, 3 defencemen, and 2 goalies. If they decide to do so however, they must pay a fee of $1.00 per week per player they are over the limit by (i.e. 1 extra forward and 1 extra goaltender = $2.00 per week), assessed directly after weekly “active” roster submissions and transactions are due on Sunday night.</span></li>
+			<li><span style="font-family:Arial, serif;">The absolute maximum number of players that may be on a GM’s bench are 8 forwards, 4 defencemen, and 2 goalies.</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Salary Cap</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">The salary cap for the pool will be equal to the salary cap set by the NHL at the beginning of every season ($59.4 million in 2010-2011)</span></li>
+			<li>Each Player's Salary will be determined by their "Cap Hit" number, taken  from NHLnumbers.com and included in the pool spreadsheet.</li>
+			<li><span style="font-family:Arial, serif;">The salary cap is assessed towards each team according to the combination of the salaries of all their “active players”</span></li>
+			<li><span style="font-family:Arial, serif;">Salary cap shall be assessed every Sunday night following the transaction deadline at 12 am. If a team is assessed as being over the cap, they must pay a fine of $5.00 plus $10.00 for every $1,000,000 they are over the cap by (i.e. over by $2,400,000 would incur a fee of $25.00 per week)</span></li>
+			<li><span style="font-family:Arial, serif;">The salary cap may be exceeded by a maximum of $3,000,000 dollars (incurring a fee of $35.00 per week)</span></li>
+		</ol>
+		</li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Yearly entry fee of $20.00</span>
+		<ol type="a">
+			<li><span style="font-family:Arial, serif;">Entry fee will be reviewed every year on the day of the draft, and may be changed by a 2/3 majority vote of all participating GMs</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Transactions:</span>
+		<ol type="a">
+			<li><span style="font-family:Arial, serif;">Free agents</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">Free agents are defined to be players that are not owned by any GM in the hockey pool </span></li>
+			<li><span style="font-family:Arial, serif;">Fee of $5.00 for each healthy free agent acquired</span></li>
+			<li><span style="font-family:Arial, serif;">Free agents replace a player on GM’s roster, making the replaced player become a free agent.</span></li>
+			<li><span style="font-family:Arial, serif;">If either the player being acquired or the player being dropped is injured, the fee shall be reduced to $2.50</span></li>
+			<li><span style="font-family:Arial, serif;">Free Agent and Waiver Claim procedure:</span>
+		<ol>
+			<li><span style="font-family:Arial, serif;">The GM that wants to pick up a free agent makes a post on the Pool FaceBook group indicating the player they wish to pick up. This may be done at any time, on any day of the week</span></li>
+			<li><span style="font-family:Arial, serif;">For the following 48 hours after the post is made, any other GM that is higher on the waiver wire may claim the player off of waivers by commenting on the FaceBook post stating their intention to waiver claim </span></li>
+			<li><span style="font-family:Arial, serif;">At the end of 48 hours, the free agent is awarded to the GM that posted in the FaceBook Thread, and has the highest position on the waiver wire. This GM is moved to the bottom of the waiver wire list.</span></li>
+			<li>Notes:
+		<ol>
+			<li><span style="font-family:Arial, serif;">If a GM has a claim, either a regular free agent claim or a waiver wire claim, they may not submit another claim. Only one claim at a time.</span></li>
+			<li><span style="font-family:Arial, serif;">If you have made a claim, and someone higher on the waiver list also submits a claim on the player, you are released from that claim. You may submit another free agent pickup or waiver claim. </span></li>
+			<li><span style="font-family:Arial, serif;">Claims may not be rescinded</span></li>
+		</ol>
+		</li>
+		</ol>
+		</li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;"><span style="font-family:Arial, serif;">Transactions between GMs</span></span>
+		<ol type="i">
+			<li>GMs may trade their assets to other GMs for other assets.</li>
+			<li>“assets” are defined as players and draft picks</li>
+			<li>Trades may be vetoed by a 2/3 majority vote of all other GMs</li>
+			<li>There shall be no trades between the Sunday following the NHL trade deadline (determined annually by the NHL) and the awarding of the Stanley Cup</li>
+		</ol>
+		</li>
+			<li>Restrictions
+		<ol type="i">
+			<li>There can be no transactions of any kind between the Sunday following the NHL trade deadline and the awarding of that year's Stanley Cup.</li>
+			<li>There can be no acquisition of free agents between the Sunday following the NHL trade deadline and after the Keeper Pool Entry Draft for the following NHL season.</li>
+		</ol>
+		</li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Prizes (as a percentage of the pot for that year):</span>
+		<ol type="a">
+			<li><span style="font-family:Arial, serif;">Prizes will be awarded as a share of the pot (the sum of all fines and fees for that year) to the GM whose team has the 1</span><sup><span style="font-family:Arial, serif;">st</span></sup><span style="font-family:Arial, serif;">, 2</span><sup><span style="font-family:Arial, serif;">nd</span></sup><span style="font-family:Arial, serif;">, and 3</span><sup><span style="font-family:Arial, serif;">rd</span></sup><span style="font-family:Arial, serif;"> most points during both the regular season and the playoffs, according to the scoring system outlined in Section (6). In addition, GMs owning players who win any of the Art Ross, Hart, Ted Lindsay, Maurice “Rocket” Richard, Norris, Selke, Calder, Vezina or Conn Smythe trophies are awarded a share of the pot as well.</span></li>
+			<li><span style="font-family:Arial, serif;">Regular Season:</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">First Place – 30%</span></li>
+			<li><span style="font-family:Arial, serif;">Second Place – 20%</span></li>
+			<li><span style="font-family:Arial, serif;">Third Place – 7.5%</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Playoffs</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">First Place – 15%</span></li>
+			<li><span style="font-family:Arial, serif;">Second place – 5%</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Awards</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">Art Ross Trophy – 2.5%</span></li>
+			<li><span style="font-family:Arial, serif;">Hart Trophy – 2.5%</span></li>
+			<li><span style="font-family:Arial, serif;">Ted Lindsay Award – 2.5%</span></li>
+			<li><span style="font-family:Arial, serif;">Maurice Richard Trophy – 2.5%</span></li>
+			<li><span style="font-family:Arial, serif;">Norris Trophy – 2.5%</span></li>
+			<li><span style="font-family:Arial, serif;">Selke Trophy – 2.5%</span></li>
+			<li><span style="font-family:Arial, serif;">Calder Trophy – 2.5%</span></li>
+			<li><span style="font-family:Arial, serif;">Vezina Trophy – 2.5%</span></li>
+			<li><span style="font-family:Arial, serif;">Conn Smythe Trophy - 2.5%</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">If no GM owns the player that wins one of the above 9 major trophies, that share of the pot is awarded instead to the GM who achieves first place in the Playoffs</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Scoring</span>
+		<ol type="a">
+			<li><span style="font-family:Arial, serif;">Forwards are to receive points as follows:</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">goals – 3 points</span></li>
+			<li><span style="font-family:Arial, serif;">assists – 2 points</span></li>
+			<li><span style="font-family:Arial, serif;">+/- (plus) – 1 point</span></li>
+			<li><span style="font-family:Arial, serif;">+/- (minus) – -1 point</span></li>
+			<li><span style="font-family:Arial, serif;">powerplay Goals – 0 points</span></li>
+			<li><span style="font-family:Arial, serif;">shorthanded Goals – 4 points</span></li>
+			<li><span style="font-family:Arial, serif;">game-winning goals 2 points</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Defencemen are to receive points as follows:</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">goals – 5 points</span></li>
+			<li><span style="font-family:Arial, serif;">assists – 3 points</span></li>
+			<li><span style="font-family:Arial, serif;">+/- (plus) – 1 point</span></li>
+			<li><span style="font-family:Arial, serif;">+/- (minus) – -1 point</span></li>
+			<li><span style="font-family:Arial, serif;">powerplay goals – 0 points</span></li>
+			<li><span style="font-family:Arial, serif;">shorthanded goals – 4 points</span></li>
+			<li><span style="font-family:Arial, serif;">game-winning goals – 2 points</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Goalies are to receive points as follows:</span>
+		<ol type="i">
+			<li><span style="font-family:Arial, serif;">regulation wins – 5 points</span></li>
+			<li><span style="font-family:Arial, serif;">overtime wins – 5 points</span></li>
+			<li><span style="font-family:Arial, serif;">shootout wins – 3 points</span></li>
+			<li><span style="font-family:Arial, serif;">regulation losses – 0 points</span></li>
+			<li><span style="font-family:Arial, serif;">overtime losses – 0 points</span></li>
+			<li><span style="font-family:Arial, serif;">shootout losses – 3 points</span></li>
+			<li><span style="font-family:Arial, serif;">shutouts – 8 points</span></li>
+			<li><span style="font-family:Arial, serif;">goals – 20 points</span></li>
+			<li><span style="font-family:Arial, serif;">assists – 3 points</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">As implied in Section (2), only “active” players can score points.</span></li>
+			<li><span style="font-family:Arial, serif;">Point totals accumulate during each regular season and each playoff season. They do not carry over as players do from season to season.</span></li>
+			<li><span style="font-family:Arial, serif;">The sum total of all the points accumulated by the players on a GM’s team equals their score during the regular season and the playoffs. It is this combined point total that is used to determine the winner of each regular season and each playoff season.</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Departure of GMs</span>
+		<ol type="a">
+			<li><span style="font-family:Arial, serif;">In the even of a departure of a GM from the pool, all of the players on that GM’s roster immediately become free agents.</span></li>
+			<li><span style="font-family:Arial, serif;">There shall be no refund of fees or fines already paid to the keeper league.</span></li>
+		</ol>
+		</li>
+			<li>Adding GMs
+		<ol>
+			<li>Should a new GM wish to join the pool, the prospective applicant may join in the event of a majority vote by all current GMs. Should the vote pass, the Commissioner will then facilitate an expansion draft.
+		<ol>
+			<li>GMs can only be added after the Stanley Cup has been awarded and before the first game of the regular season.</li>
+		</ol>
+		</li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Commissioner</span>
+		<ol>
+			<li><span style="font-family:Arial, serif;">At the beginning of the keeper pool, a commissioner shall be appointed to oversee the pool’s operations. </span></li>
+			<li><span style="font-family:Arial, serif;">The commissioner can be a GM, and shall monitor the operations of the pool in a fair and balanced manner. The commissioner shall have discretion over conflicts that arise during the course of the keeper pool that are not addressed in the rules that have been outlined here. In doing so, the commissioner shall decide whether or not to settle disputes independently or to put issues to a broad vote of the GMs.</span></li>
+			<li><span style="font-family:Arial, serif;">The commissioner may only be removed forcibly by the unanimous agreement of all participating GMs (a matter in which the commissioner would be unable to participate).</span></li>
+			<li><span style="font-family:Arial, serif;">In the event that the commissioner is removed (by the process in Section [8,b] or if the commissioner voluntarily resigns), a new commissioner shall be elected by a simple majority vote.</span></li>
+		</ol>
+		</li>
+			<li><span style="font-family:Arial, serif;">Amendment</span>
+		<ol>
+			<li><span style="font-family:Arial, serif;">Every part of these rules is able to be amended by a 2/3 majority vote of all participating GM’s.</span></li>
+		</ol>
+		</li>
+		</ol>
+	</div>
+
+    <footer class="row">
+      <div class="panel-footer text-center">
+        <p><span class="glyphicon glyphicon-copyright-mark grey"></span> Ben Miller - 2014</p>
+      </div>
+  </footer>
+</body>
+</html>
