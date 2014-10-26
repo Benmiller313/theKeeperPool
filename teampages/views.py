@@ -32,5 +32,6 @@ def teampage(request, team_name):
 	return render_to_response("teampages/teampage.html", context)
 
 def rules(request):
-
-	return render_to_response("teampages/rules.html")
+	teams = list(Team.objects.all().order_by('name'))
+	context = {"teams":teams}
+	return render_to_response("teampages/rules.html", context)
