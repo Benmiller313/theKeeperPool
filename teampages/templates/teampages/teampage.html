@@ -75,6 +75,46 @@
 			</div>
     	</div>
     </div>
+    <div class="container">
+      <h2>Banners</h2><hr>
+      {% for year, banners_year in banners %}
+      <div class="row">
+        <div class="col-md-1  year-column">
+        <span>{{year}}</span>
+        </div>
+        <div class="col-md-11">
+          <div class="row">
+            {% for banner in banners_year %}
+            <div class="col-md-2 banner-columns">
+              <div class="banner-outer">
+                <div class="banner-border">
+                  <div class="banner-inner">
+                    <div class="banner-title">
+                      <p>The</p>
+                      <p>Keeper Pool</p>
+                    </div>
+                    <div class="banner-description">
+                      <p>
+                        {{banner.trophy}}
+                        {% if banner.player %}
+                        <br>-<br>
+                        {{banner.player}}
+                        {% endif %}
+                      </p>                                 
+                    </div>
+                    <div class="banner-year">
+                      <p>{{banner.year|add:"-1"}}-{{banner.year}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
     <footer class="row">
     <div class="panel-footer text-center">
 		<p><span class="glyphicon glyphicon-copyright-mark grey"></span> Ben Miller - 2014</p>
