@@ -1,16 +1,3 @@
-/*
-.navbar-default { 
-	background-color: #DD1414;	
-}
-
-.navbar-default .navbar-brand {
-	color: #fff;
-}
-
-.navbar-default .navbar-nav>li>a {
-	color: #fff;
-} */
-
 .table > tbody > tr > td.position-cell { 
 	vertical-align: middle;
 	border-left: 1px solid #ddd;
@@ -23,4 +10,127 @@
 
 .table .half-width { 
 	width : 60px;
+}
+
+
+.banner-outer { 
+	background-color: rgb(223, 3, 3);
+	width: 170px;
+	height: 300px;
+	margin-bottom: 60px;
+}
+
+.banner-border { 
+	background-color: white;
+	width: 160px;
+	height: 290px;
+	margin: 0 auto;
+	position: relative;
+	top: 5px;
+}
+
+.banner-inner { 
+	background-color: rgb(223, 3, 3);
+	width: 154px;
+	height: 284px;
+	margin: 0 auto;
+	position: relative;
+	top: 3px;
+}
+
+.banner-outer:before {
+	content: ' ';
+	position: absolute;
+	width: 0px;
+	height: 0px;
+	top: 300px;
+	border-left: 85px solid transparent;
+	border-right: 85px solid transparent;
+	border-top: 30px solid rgb(223, 3, 3);
+}
+
+.banner-border:before { 
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	top: 290px;
+	border-left: 80px solid transparent;
+	border-right: 80px solid transparent;
+	border-top: 27px solid white;
+	z-index: 998
+}
+
+.banner-inner:before{
+	content: ' ';
+	position: absolute;
+	z-index: 999;
+	top: 284px;
+	height: 0;
+	width: 0;
+	border-left: 77px solid transparent;
+	border-right: 77px solid transparent;
+	border-top: 26px solid rgb(223, 3, 3);
+}
+
+.banner-title {
+	text-align: center;
+	padding-top	: 5px; 
+}
+
+.banner-title p {
+	margin-bottom: 0px;
+	font-size: 18px;
+	color:	white;
+	text-transform: uppercase;
+	font-weight: 700;
+
+}
+
+.banner-description {
+	text-align: center;
+	height: 190px;
+	padding: 2px;
+}
+
+.banner-description p {
+	font-size: 19px;
+	font-weight: 900;
+	font-style: italic;
+	color: white;
+	text-transform: uppercase;
+	position: relative;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.valign { 
+	position: relative;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.banner-year { 
+	text-align: center;
+}
+
+.banner-year { 
+	font-size: 20px;
+	font-weight: 600;
+	color: white;
+	text-transform: uppercase;
+}
+
+.year-column {
+	padding-top: 19px;
+    color: #ccc;
+    font-size: 28px;
+}
+
+.banner-columns { 
+	width: auto;
 }
