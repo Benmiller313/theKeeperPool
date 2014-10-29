@@ -22,3 +22,12 @@ class Banner(models.Model):
 
 	def __unicode__(self):
 		return self.trophy.name + " - " + str(self.year)
+
+class FAPickup(models.Model):
+	team = models.ForeignKey(Team)
+	player = models.CharField(max_length=256)
+	injured = models.BooleanField()
+	date = models.DateTimeField()
+
+	def __unicode__(self):
+		return self.team.name + " - " + self.player
