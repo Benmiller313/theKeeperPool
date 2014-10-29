@@ -1,73 +1,37 @@
-<!doctype html>
-<html lang="en-US">
-<head>
-	<title>The Keeper Pool</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'teampages/base.html' %}
+
+{% block static_links %}
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'teampages/bootstrap/css/bootstrap.min.css' %}">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="{% static 'teampages/bootstrap/js/bootstrap.min.js' %}"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/home.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'teampages/css/base.css' %}">
+{% endblock %}
 
-</head>
-
-<body>
-	<nav class="navbar navbar-default" role="navigation">
-    <div class="container">      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">The Keeper Pool</a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class=><a href="/rules/">Rules</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teams <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              {% for team in teams %}
-                <li><a href="/teams/{{team.name}}">{{team.name}}</a></li>
-              {% endfor %}
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-	
+{% block main_content %}
     <header id="heading">
 		<div class="container text-center">
 			<h1>The Keeper Pool</h1>
 			<h4>Rosters, Updates, and Rules For The Greatest Pool Of All Time</h4>
 		</div>
 	</header>
-    <div id="main-content">
-      <div class="container">
-         <div class="row">
-         	{% for team in teams %}
-         	{% if forloop.counter0|divisibleby:4 and not forloop.counter0 == 0%}
-         </div>
-         <div class="row">
-         	{% endif %}         
-			<div class="col-md-3">
-				<a class="btn btn-default teampage-link" href="/teams/{{team.name}}">
-					<img src="{% static '' %}teampages/images/{{team.mascot_image}}" class="img-circle">
-					<h2>{{team.name}}'s Team</h2>
-				</a>
-			</div>
-			{% endfor %}
+  <div id="main-content">
+    <div class="container">
+       <div class="row">
+       	{% for team in teams %}
+       	{% if forloop.counter0|divisibleby:4 and not forloop.counter0 == 0%}
+       </div>
+       <div class="row">
+       	{% endif %}         
+		<div class="col-md-3">
+			<a class="btn btn-default teampage-link" href="/teams/{{team.name}}">
+				<img src="{% static '' %}teampages/images/{{team.mascot_image}}" class="img-circle">
+				<h2>{{team.name}}'s Team</h2>
+			</a>
+		</div>
+		{% endfor %}
 
-        </div><!-- @end .row -->
-    </div>
-    <footer class="row">
-      <div class="panel-footer text-center">
-        <p><span class="glyphicon glyphicon-copyright-mark grey"></span> Ben Miller - 2014</p>
-      </div>
-  </footer>
-</body>
+      </div><!-- @end .row -->
+  </div>
+{% endblock %}

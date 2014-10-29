@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
+from django.utils import timezone
 
-from teampages.models import Team, Banner
+from teampages.models import Team, Banner, FAPickup
 import math
+from datetime import datetime, MINYEAR
 
 def home(request):
 	teams = list(Team.objects.all().order_by("name"))
@@ -35,3 +37,38 @@ def rules(request):
 	teams = list(Team.objects.all().order_by('name'))
 	context = {"teams":teams}
 	return render_to_response("teampages/rules.html", context)
+
+def waiverOrder(request):
+	teams = list(Team.objects.all().order_by('name'))
+
+	#calculate the waiver order		
+
+	waiver_order = [];
+	for team in Team.objects.all().order_by('name'):
+		pickups = FAPickup.objects.filter(team=team).order_by('date')
+		if not pickups:
+			waiver_order.append((team, None))
+		else:
+			waiver_order.append((team, pickups.latest('date')))
+
+	def waiver_key(waiver):
+		(team, pickup) = waiver
+		if not pickup:
+			if team.name=="Nick":
+				return timezone.make_aware(datetime(year=2001, month=1, day=1), timezone.get_default_timezone())
+			return timezone.make_aware(datetime(year=2000, month=1, day=1), timezone.get_default_timezone())
+		else:
+			return pickup.date
+
+	waiver_order.sort(key=waiver_key)
+
+	print waiver_order
+
+	context = { 
+		"teams": teams,
+		"waiver_order": waiver_order,
+	}
+	return render_to_response("teampages/waiver_order.html", context)
+
+
+

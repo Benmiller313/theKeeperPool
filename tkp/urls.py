@@ -17,5 +17,6 @@ urlpatterns = patterns('',
     url(r'^$', 'teampages.views.home', name='home'),
     url(r'^teams/', include("teampages.urls")),
 	url(r'^rules/$', 'teampages.views.rules', name="rules"),
+    url(r'^waiverorder/$', 'teampages.views.waiverOrder', name='waiverOrder'),
 
 )
