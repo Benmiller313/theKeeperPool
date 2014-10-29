@@ -99,6 +99,15 @@
   }
 },
 {
+  "pk": 12, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+    "model": "fapickup", 
+    "name": "fa pickup", 
+    "app_label": "teampages"
+  }
+},
+{
   "pk": "v1pn3x9oiyjvmucs09ocqmyt79xy94bx", 
   "model": "sessions.session", 
   "fields": {
@@ -112,24 +121,6 @@
   "fields": {
     "domain": "example.com", 
     "name": "example.com"
-  }
-},
-{
-  "pk": 1, 
-  "model": "south.migrationhistory", 
-  "fields": {
-    "applied": "2014-10-25T21:42:57.036Z", 
-    "app_name": "teampages", 
-    "migration": "0001_initial"
-  }
-},
-{
-  "pk": 2, 
-  "model": "south.migrationhistory", 
-  "fields": {
-    "applied": "2014-10-25T21:58:27.783Z", 
-    "app_name": "teampages", 
-    "migration": "0002_auto__add_field_banner_player"
   }
 },
 {
@@ -766,6 +757,93 @@
 },
 {
   "pk": 1, 
+  "model": "teampages.fapickup", 
+  "fields": {
+    "injured": false, 
+    "player": "Damon Severson", 
+    "date": "2014-10-28T02:04:00Z", 
+    "team": 1
+  }
+},
+{
+  "pk": 2, 
+  "model": "teampages.fapickup", 
+  "fields": {
+    "injured": false, 
+    "player": "Rick Nash", 
+    "date": "2014-10-22T09:10:00Z", 
+    "team": 2
+  }
+},
+{
+  "pk": 3, 
+  "model": "teampages.fapickup", 
+  "fields": {
+    "injured": false, 
+    "player": "Mike Ribeiro", 
+    "date": "2014-10-23T21:17:00Z", 
+    "team": 5
+  }
+},
+{
+  "pk": 4, 
+  "model": "teampages.fapickup", 
+  "fields": {
+    "injured": true, 
+    "player": "Ryan Callahan", 
+    "date": "2014-10-20T06:16:00Z", 
+    "team": 3
+  }
+},
+{
+  "pk": 5, 
+  "model": "teampages.fapickup", 
+  "fields": {
+    "injured": false, 
+    "player": "Nick Holden", 
+    "date": "2014-10-16T21:33:00Z", 
+    "team": 5
+  }
+},
+{
+  "pk": 6, 
+  "model": "teampages.fapickup", 
+  "fields": {
+    "injured": false, 
+    "player": "Thomas Hertl", 
+    "date": "2013-10-10T18:04:00Z", 
+    "team": 8
+  }
+},
+{
+  "pk": 1, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2014-10-25T21:42:57.036Z", 
+    "app_name": "teampages", 
+    "migration": "0001_initial"
+  }
+},
+{
+  "pk": 2, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2014-10-25T21:58:27.783Z", 
+    "app_name": "teampages", 
+    "migration": "0002_auto__add_field_banner_player"
+  }
+},
+{
+  "pk": 3, 
+  "model": "south.migrationhistory", 
+  "fields": {
+    "applied": "2014-10-29T02:38:29.357Z", 
+    "app_name": "teampages", 
+    "migration": "0003_auto__add_fapickup"
+  }
+},
+{
+  "pk": 1, 
   "model": "auth.permission", 
   "fields": {
     "codename": "add_permission", 
@@ -1059,6 +1137,33 @@
     "codename": "delete_banner", 
     "name": "Can delete banner", 
     "content_type": 11
+  }
+},
+{
+  "pk": 34, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "add_fapickup", 
+    "name": "Can add fa pickup", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 35, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "change_fapickup", 
+    "name": "Can change fa pickup", 
+    "content_type": 12
+  }
+},
+{
+  "pk": 36, 
+  "model": "auth.permission", 
+  "fields": {
+    "codename": "delete_fapickup", 
+    "name": "Can delete fa pickup", 
+    "content_type": 12
   }
 },
 {
@@ -2039,6 +2144,97 @@
     "change_message": "Changed mascot_image.", 
     "user": 1, 
     "content_type": 8
+  }
+},
+{
+  "pk": 75, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2014-10-29T02:54:47.024Z", 
+    "object_repr": "FAPickup object", 
+    "object_id": "1", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 76, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2014-10-29T02:58:09.266Z", 
+    "object_repr": "Andrew - Rick Nash", 
+    "object_id": "2", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 77, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2014-10-29T02:59:55.091Z", 
+    "object_repr": "Matt - Mike Ribeiro", 
+    "object_id": "3", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 78, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2014-10-29T03:01:08.068Z", 
+    "object_repr": "Evan - Ryan Callahan", 
+    "object_id": "4", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 79, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2014-10-29T03:01:57.392Z", 
+    "object_repr": "Matt - Holden", 
+    "object_id": "5", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 80, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 2, 
+    "action_time": "2014-10-29T03:03:15.522Z", 
+    "object_repr": "Matt - Nick Holden", 
+    "object_id": "5", 
+    "change_message": "Changed player.", 
+    "user": 1, 
+    "content_type": 12
+  }
+},
+{
+  "pk": 81, 
+  "model": "admin.logentry", 
+  "fields": {
+    "action_flag": 1, 
+    "action_time": "2014-10-29T05:01:48.381Z", 
+    "object_repr": "Tyler - Thomas Hertl", 
+    "object_id": "6", 
+    "change_message": "", 
+    "user": 1, 
+    "content_type": 12
   }
 }
 ]
