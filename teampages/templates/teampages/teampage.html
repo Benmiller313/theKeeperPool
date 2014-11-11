@@ -44,6 +44,13 @@
     	</div>
     </div>
     <div class="container">
+      <h2>Draft Picks</h2>
+      <hr>
+      <div class="row">
+        {% include picks_template %}
+      </div>
+    </div>
+    <div class="container">
       <h2>Banners</h2><hr>
       {% for year, banners_year in banners %}
       <div class="row">
