@@ -23,6 +23,7 @@ def teampage(request, team_name):
 		banners[val["year"]] = list(Banner.objects.filter(team__name=team_name, year=val["year"]))
 	roster_template = "teampages/teams/rosters/"+team_name+".html"
 	lineup_template = "teampages/teams/lineups/"+team_name+".html"
+	picks_template = "teampages/teams/picks/"+team_name+".html"
 
 	context = {	
 		"team": team,
@@ -30,6 +31,7 @@ def teampage(request, team_name):
 		"banners": sorted(banners.iteritems(), reverse=True),
 		"roster_template": roster_template,
 		"lineup_template": lineup_template,
+		"picks_template": picks_template,
 	}
 	return render_to_response("teampages/teampage.html", context)
 
