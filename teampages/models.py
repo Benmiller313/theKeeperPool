@@ -31,3 +31,21 @@ class FAPickup(models.Model):
 
 	def __unicode__(self):
 		return self.team.name + " - " + self.player
+
+
+class Player(models.Model):
+	id = models.IntegerField(primary_key=True)
+	first_name = models.CharField(max_length=100)
+	last_name = models.CharField(max_length=100)
+	position = models.CharField(max_length=2)
+	salary = models.IntegerField()
+	nhl_team = models.CharField(max_length=4)
+	owner = models.ForeignKey(Team, null=True, blank=True, default = None)
+	active = models.BooleanField(default=False)
+	in_waivers = models.BooleanField(default=False)
+
+	def __unicode__(self):
+		return self.first_name + ' ' + self.last_name + '\n' + self.nhl_team + '\n' + self.position + '\n' + unicode(self.salary) + '\n'
+
+	def full_name(self):
+		return self.last_name + ', ' + self.first_name
