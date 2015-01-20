@@ -23,15 +23,6 @@ class Banner(models.Model):
 	def __unicode__(self):
 		return self.trophy.name + " - " + str(self.year)
 
-class FAPickup(models.Model):
-	team = models.ForeignKey(Team)
-	player = models.CharField(max_length=256)
-	injured = models.BooleanField()
-	date = models.DateTimeField()
-
-	def __unicode__(self):
-		return self.team.name + " - " + self.player
-
 
 class Player(models.Model):
 	id = models.IntegerField(primary_key=True)
@@ -47,5 +38,16 @@ class Player(models.Model):
 	def __unicode__(self):
 		return self.first_name + ' ' + self.last_name + '\n' + self.nhl_team + '\n' + self.position + '\n' + unicode(self.salary) + '\n'
 
-	def full_name(self):
+	def fullName(self):
 		return self.last_name + ', ' + self.first_name
+
+class FAPickup(models.Model):
+	team = models.ForeignKey(Team)
+	player = models.CharField(max_length=256)
+	player_added = models.ForeignKey(Player,related_name="player_added")
+	player_dropped = models.ForeignKey(Player, related_name="player_dropped")
+	injured = models.BooleanField()
+	date = models.DateTimeField()
+
+	def __unicode__(self):
+		return self.team.name + " - " + self.player

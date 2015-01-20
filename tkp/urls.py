@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+from ajax_select import urls as ajax_select_urls
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^adinn/lookup', include(ajax_select_urls)),
     url(r'^$', 'teampages.views.home', name='home'),
     url(r'^teams/', include("teampages.urls")),
 	url(r'^rules/$', 'teampages.views.rules', name="rules"),
