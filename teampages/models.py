@@ -41,6 +41,17 @@ class Player(models.Model):
 	def fullName(self):
 		return self.last_name + ', ' + self.first_name
 
+
+class DraftPick(models.Model):
+	year = models.IntegerField()
+	round = models.IntegerField()
+	owner = models.ForeignKey(Team, related_name="owner")
+	original_owner = models.ForeignKey(Team, related_name="original_owner")
+	player = models.ForeignKey(Player, null=True)
+
+	def __unicode__(self):
+		return self.original_owner.name + "'s " + str(self.year) + " round " + str(self.round) 
+
 class FAPickup(models.Model):
 	team = models.ForeignKey(Team)
 	player = models.CharField(max_length=256)
@@ -51,3 +62,15 @@ class FAPickup(models.Model):
 
 	def __unicode__(self):
 		return self.team.name + " - " + self.player
+
+
+class Trade(models.Model):
+	teamA = models.ForeignKey(Team, related_name="teamA")
+	teamB = models.ForeignKey(Team, related_name="teamB")
+	players_received_a = models.ManyToManyField(Player, related_name="players_received_a")
+	players_received_b = models.ManyToManyField(Player, related_name="players_received_b")
+	picks_received_a = models.ManyToManyField(DraftPick, related_name="picks_received_a")
+	picks_received_b = models.ManyToManyField(DraftPick, related_name="picks_received_b")
+	date = models.DateTimeField()
+
+
