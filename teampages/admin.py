@@ -6,7 +6,9 @@ from ajax_select import make_ajax_form
 from ajax_select.admin import AjaxSelectAdmin, AjaxSelectAdminTabularInline
 
 class PlayerAdmin(admin.ModelAdmin):
-	pass
+	list_filter=("owner", )
+	search_fields=["first_name", "last_name"]
+
 admin.site.register(Player, PlayerAdmin)
 
 class FAPickupAdmin(AjaxSelectAdmin):

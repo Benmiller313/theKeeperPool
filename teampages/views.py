@@ -1,14 +1,33 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.utils import timezone
+from django import forms
+from ajax_select.fields import AutoCompleteSelectField
 
 from teampages.models import Team, Banner, FAPickup
 import math
 from datetime import datetime, MINYEAR
 
+
+class PlayerSearchForm(forms.Form):
+	q = AutoCompleteSelectField(
+		'player',
+		required=True,
+		help_text="help_text",
+		label="label",
+		)
+
+
+
 def home(request):
+
 	teams = list(Team.objects.all().order_by("name"))
 	context = {"teams":teams}
+	initial = {'q': "\"This is an initial value,\" said O'Leary."}
+	form=PlayerSearchForm()
+	context["form"] = form
+	if 'q' in request.GET:
+		context['entered'] = request.GET.get('q')
 	return render_to_response("teampages/home.html", context)
 
 

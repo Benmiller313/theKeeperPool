@@ -160,3 +160,6 @@ LOGGING = {
 AJAX_LOOKUP_CHANNELS = {
     'player' : ('teampages.lookups', 'PlayerByName'),
 }
+
+AJAX_SELECT_INLINES = 'inline'
+AJAX_SELECT_BOOTSTRAP = True

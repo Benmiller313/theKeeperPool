@@ -3,11 +3,15 @@
 <head>
   <title>The Keeper Pool</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="/static/ajax_select/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
   {% block static_links %}
+
   {% endblock %}
 </head>
 
 <body>
+
   {% block top_nav %}
   <nav class="navbar navbar-default" role="navigation">
     <div class="container">      <!-- Brand and toggle get grouped for better mobile display -->
@@ -36,7 +40,9 @@
         </ul>
         <form role="search" class="navbar-form navbar-right">
           <div class="form-group">
-            <input type="text" placeholder="Player Search" class="form-control">
+            <input class="form-control" type="text" placeholder="Player Search" name="q_text" id="id_q_text" value="" autocomplete="on"  maxlength="255" />
+
+<input type="hidden" name="q" id="id_q" value="" data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/adinn/lookupajax_lookup/player&quot;}" />
           </div>
         </form>
       </div><!-- /.navbar-collapse -->
