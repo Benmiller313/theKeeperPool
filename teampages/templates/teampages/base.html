@@ -3,15 +3,66 @@
 <head>
   <title>The Keeper Pool</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script type="text/javascript" src="/static/ajax_select/js/bootstrap.js"></script>
-  <script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
+
   {% block static_links %}
 
   {% endblock %}
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+
+  <script type="text/javascript">
+  $(function() {
+
+    var projects = [
+      {
+        value: "jquery",
+        label: "jQuery",
+        desc: "the write less, do more, JavaScript library",
+        icon: "jquery_32x32.png"
+      },
+      {
+        value: "jquery-ui",
+        label: "jQuery UI",
+        desc: "the official user interface library for jQuery",
+        icon: "jqueryui_32x32.png"
+      },
+      {
+        value: "sizzlejs",
+        label: "Sizzle JS",
+        desc: "a pure-JavaScript CSS selector engine",
+        icon: "sizzlejs_32x32.png"
+      }
+    ];
+
+
+    $( "#player_search").autocomplete({
+      minLength:3,
+      source: function( request, response){
+        $.ajax({
+          url: "/admin/lookupajax_lookup/player", 
+          dataType: "json", 
+          data: {
+            term: request.term
+          },
+          success: function(data){
+            response(data);
+          }
+        });
+      },
+      focus : function(event, ui){
+        return false;
+      },
+      select: function(event, ui){
+        alert(ui);
+        return false;
+      }
+    });
+  });
+  </script>
 </head>
 
 <body>
-
   {% block top_nav %}
   <nav class="navbar navbar-default" role="navigation">
     <div class="container">      <!-- Brand and toggle get grouped for better mobile display -->
@@ -40,11 +91,10 @@
         </ul>
         <form role="search" class="navbar-form navbar-right">
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Player Search" name="q_text" id="id_q_text" value="" autocomplete="on"  maxlength="255" />
-
-<input type="hidden" name="q" id="id_q" value="" data-ajax-select="autocompleteselect" data-plugin-options="{&quot;min_length&quot;: 1, &quot;html&quot;: true, &quot;source&quot;: &quot;/adinn/lookupajax_lookup/player&quot;}" />
+            <input id="player_search" type="text" placeholder="Player Search" class="form-control">
           </div>
         </form>
+        <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none;"></ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
@@ -60,5 +110,4 @@
   </footer>
   {% endblock %}
 </body>
-
 

@@ -14,7 +14,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^adinn/lookup', include(ajax_select_urls)),
+    url(r'^admin/lookup', include(ajax_select_urls)),
     url(r'^$', 'teampages.views.home', name='home'),
     url(r'^teams/', include("teampages.urls")),
 	url(r'^rules/$', 'teampages.views.rules', name="rules"),
