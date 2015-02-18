@@ -22,3 +22,6 @@ class PlayerByName(LookupChannel):
 	def format_item_display(self,obj):
 		""" (HTML) formatted item for displaying item in the selected deck area """
 		return u"%s<div><i>%s</i></div>" % (escape(obj.fullName()),escape(obj.owner))
+
+	def check_auth(self, request):
+		pass

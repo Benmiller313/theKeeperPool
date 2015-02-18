@@ -9,7 +9,6 @@
   {% endblock %}
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
   <script type="text/javascript">
   $(function() {
@@ -40,7 +39,7 @@
       minLength:3,
       source: function( request, response){
         $.ajax({
-          url: "/admin/lookupajax_lookup/player", 
+          url: "/lookup/ajax_lookup/player", 
           dataType: "json", 
           data: {
             term: request.term

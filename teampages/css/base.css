@@ -7,3 +7,11 @@
 	color: #ccc;
 }
 
+ul .ui-autocomplete {
+	list-style: none;
+	width: 300px;
+
+}
+
+
+

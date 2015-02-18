@@ -4,7 +4,7 @@ from django.utils import timezone
 from django import forms
 from ajax_select.fields import AutoCompleteSelectField
 
-from teampages.models import Team, Banner, FAPickup
+from teampages.models import Team, Banner, FAPickup, Player
 import math
 from datetime import datetime, MINYEAR
 
@@ -90,6 +90,11 @@ def waiverOrder(request):
 		"waiver_order": waiver_order,
 	}
 	return render_to_response("teampages/waiver_order.html", context)
+
+
+def playerpage(request, player_id):
+
+	player = get_object_or_404(Player, id=player_id)
 
 
 
