@@ -1,0 +1,41 @@
+{% extends 'teampages/base.html' %}
+
+{% block static_links %}
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/bootstrap/css/bootstrap.min.css' %}">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'teampages/bootstrap/js/bootstrap.min.js' %}"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'teampages/css/base.css' %}">
+{% endblock %}
+
+{% block main_content %}
+{{player}}
+
+{{transaction_list}}
+
+<div class="container">
+	<div class="page-header">
+		<h1>{{player.fullName}}</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<h4 class="stat">Owner:</h4>
+			<span>{{player.owner}}</span>
+		</div>
+		<div class="col-md-3">
+			<h4 class="stat">Position:</h4>
+			<span>{{player.position}}
+		</div>
+		<div class="col-md-3">
+			<h4 class="stat">NHL Affiliation:</h4>
+			<span>{{player.nhl_team}}</span>
+		</div>
+		<div class="col-md-3">
+			<h4 class="stat">Salary:</h4>
+			<span>{{player.salary}}</span>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+

@@ -33,20 +33,25 @@ def get_all_players():
 				name = nameCell.a.string.split(',')
 				player.first_name = name[1].strip()
 				player.last_name = name[0].strip()
-				player.position = parse_player_link_title(row.td.a['title'])[0]
+				player.position = parse_player_link_title(row.td.a['title'], name)[0]
 				player.salary = get_player_salary(row)
 				player.nhl_team = team
-				print player
+				#print player
 				player.save()
 def get_team_from_url(url):
-	print url
+	#print url
 	team = re.search('/teams/(.*)', url).group(1)
 	return team
 
-def parse_player_link_title(title):
+def parse_player_link_title(title, name):
 	position = re.search('Position: (.*)<br />', title).group(1)
 	if position == 'Center' or position == 'Left' or position == 'Right':
 		position = 'Forward'
+
+	check =re.search('Retained Salary (.*)<', title)
+	if check:
+		print name[0], name[1], check.group(1)
+
 	return position
 
 def check_if_real_player(row):

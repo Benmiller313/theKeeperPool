@@ -2,9 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.utils import timezone
 from django import forms
+from django.db.models import Q
 from ajax_select.fields import AutoCompleteSelectField
 
-from teampages.models import Team, Banner, FAPickup, Player
+from teampages.models import Team, Banner, FAPickup, Player, Trade
 import math
 from datetime import datetime, MINYEAR
 
@@ -93,8 +94,22 @@ def waiverOrder(request):
 
 
 def playerpage(request, player_id):
-
 	player = get_object_or_404(Player, id=player_id)
+	teams = list(Team.objects.all().order_by('name'))
+
+	trades = Trade.objects.filter(Q(players_received_a=player) | Q(players_received_b=player))
+	pickups = FAPickup.objects.filter(Q(player_added=player) | Q(player_dropped=player))
+
+	transaction_list = sorted(list(trades)+list(pickups), key=lambda trans: trans.date, reverse=True)
+
+
+	context={
+		"teams": teams, 
+		"player":player,
+		"transaction_list":transaction_list,
+	}
+
+	return render_to_response("teampages/playerpage.html", context)
 
 
 

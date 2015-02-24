@@ -12,3 +12,9 @@ ul .ui-autocomplete {
 	width: 300px;
 
 }
+
+
+h4.stat { 
+	display: inline;
+	margin-right: 5px;
+}

@@ -45,8 +45,8 @@ class Player(models.Model):
 class DraftPick(models.Model):
 	year = models.IntegerField()
 	round = models.IntegerField()
-	owner = models.ForeignKey(Team, related_name="owner")
-	original_owner = models.ForeignKey(Team, related_name="original_owner")
+	owner = models.ForeignKey(Team, related_name="current_picks")
+	original_owner = models.ForeignKey(Team, related_name="original_picks")
 	player = models.ForeignKey(Player, null=True)
 
 	def __unicode__(self):
