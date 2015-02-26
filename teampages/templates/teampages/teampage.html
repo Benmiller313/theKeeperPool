@@ -23,7 +23,15 @@
 							<th class="col-md-2">Salary</th>
 							</tr>
 						</thead>
-				{% include roster_template %}
+            {% for pos, players in roster.iteritems %}
+              {% for player in players %}
+                {% if forloop.first %}
+                  <td class="position-cell" align="middle" rowspan="{{players|length}}">{{pos}}</td>
+                {% endif %}
+                </td><td >{{player.fullName}}</td><td >{{player.salary}}</td>
+                </tr>
+              {%endfor%}
+            {% endfor %}
     			</table>
 			</div>
 			<div class="col-md-1">
@@ -38,7 +46,15 @@
 							<th class="col-md-2">Salary</th>
 							</tr>
 						</thead>
-				{% include lineup_template %}
+				    {% for pos, players in lineup.iteritems %}
+              {% for player in players %}
+                {% if forloop.first %}
+                  <td class="position-cell" align="middle" rowspan="{{players|length}}">{{pos}}</td>
+                {% endif %}
+                </td><td >{{player.fullName}}</td><td >{{player.salary}}</td>
+                </tr>
+              {%endfor%}
+            {% endfor %}
     			</table>
 			</div>
     	</div>
@@ -47,7 +63,20 @@
       <h2>Draft Picks</h2>
       <hr>
       <div class="row">
-        {% include picks_template %}
+      {% for year, years_picks in picks.iteritems %}
+        <div class="col-md-3">
+        <table class="table">
+        <tbody>
+        <tr>
+        <td class="position-cell" align="middle" rowspan="8">{{year}}</td>
+        {% for pick in years_picks %}
+          <td>{{pick.original_owner.name}}'s round {{pick.round}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        </div>
+      {%endfor%}
       </div>
     </div>
     <div class="container">

@@ -5,7 +5,7 @@ from django import forms
 from django.db.models import Q
 from ajax_select.fields import AutoCompleteSelectField
 
-from teampages.models import Team, Banner, FAPickup, Player, Trade
+from teampages.models import Team, Banner, FAPickup, Player, Trade, DraftPick
 import math
 from datetime import datetime, MINYEAR
 
@@ -45,10 +45,23 @@ def teampage(request, team_name):
 	lineup_template = "teampages/teams/lineups/"+team_name+".html"
 	picks_template = "teampages/teams/picks/"+team_name+".html"
 
+
 	context = {	
 		"team": team,
 		"teams": teams,
 		"banners": sorted(banners.iteritems(), reverse=True),
+		"roster": {
+			"F": Player.objects.filter(owner=team, position="F"),
+			"D": Player.objects.filter(owner=team, position="D"),
+			"G": Player.objects.filter(owner=team, position="G"),
+		},
+		"lineup": {
+			"F": Player.objects.filter(owner=team, position="F", active=True),
+			"D": Player.objects.filter(owner=team, position="D", active=True),
+			"G": Player.objects.filter(owner=team, position="G", active=True),
+		},
+		"picks": {year:DraftPick.objects.filter(owner=team, year=year) for year in 
+			[pick["year"] for pick in DraftPick.objects.all().values('year').distinct()]},
 		"roster_template": roster_template,
 		"lineup_template": lineup_template,
 		"picks_template": picks_template,

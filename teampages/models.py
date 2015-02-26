@@ -8,6 +8,15 @@ class Team(models.Model):
 	def __unicode__(self):
 		return self.name
 
+	def totalSalary(self):
+		all_sal = [player.salary for player in self.player_set.all()]
+		return sum(all_sal)
+
+	def lineupSalary(self):
+		roster_sal = [player.salary for player in self.player_set.filter(active=True)]
+		return sum(roster_sal)
+
+
 class Trophy(models.Model):
 	name = models.CharField(max_length=256)
 	
