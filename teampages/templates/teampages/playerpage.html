@@ -5,19 +5,16 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'teampages/bootstrap/css/bootstrap.min.css' %}">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="{% static 'teampages/bootstrap/js/bootstrap.min.js' %}"></script>
-  <link rel="stylesheet" type="text/css" href="{% static 'teampages/css/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/transfers.css' %}">
 {% endblock %}
-
 {% block main_content %}
-{{player}}
-
-{{transaction_list}}
 
 <div class="container">
 	<div class="page-header">
 		<h1>{{player.fullName}}</h1>
 	</div>
-	<div class="row">
+	<div class="row stats-row">
 		<div class="col-md-3">
 			<h4 class="stat">Owner:</h4>
 			<span>{{player.owner}}</span>
@@ -35,6 +32,39 @@
 			<span>{{player.salary}}</span>
 		</div>
 	</div>
+	<h3>Transaction History</h3>
+	<hr/>
+	{% for trans in transaction_list %}
+	<div class="row">
+		<div class="col-md-2">
+			<span class="trans-type">{{trans.type}}</span>
+			<span class="trans-date">{{trans.date}}</span>
+		</div>
+		<div class="col-md-2">
+			<span class="trans-teamname">{{trans.left_team}}</span>
+			<span class="trans-verb">Acquires:</span>
+			{% for asset in trans.left_aq %}
+			<p>{{asset}}</p>
+			{% endfor %}
+		</div>
+		<div class="col-md-1">
+			{% if trans.type == "Trade" %}
+			<span class="glyphicon glyphicon-transfer" id="transfer"></span>
+			{% else %}
+			<span class="glyphicon glyphicon-sort" id="updown"></span>
+			{% endif %}
+		</div>
+		<div class="col-md-2">
+			<span class="trans-teamname">{{trans.right_team}}</span>
+			<span class="trans-verb">{% if trans.type == "Trade" %}Acquires:{% else %}Drops:{% endif %}</span>
+			{% for asset in trans.right_aq %}
+			<p>{{asset}}</p>
+			{% endfor %}
+		</div>
+
+	</div>
+	<hr/>
+	{% endfor %}
 </div>
 
 {% endblock %}

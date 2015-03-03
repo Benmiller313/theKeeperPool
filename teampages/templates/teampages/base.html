@@ -45,9 +45,25 @@
     };
   });
   </script>
+  <script>
+
+    $(document).ready(function() {
+
+     var docHeight = $(window).height();
+     var footerHeight = $('#footer').height();
+     var footerTop = $('#footer').position().top + footerHeight;
+
+     if (footerTop < docHeight) {
+      $('#footer').css('margin-top', 0+ (docHeight - footerTop) + 'px');
+     }
+    });
+  </script>
+
+
 </head>
 
 <body>
+
   {% block top_nav %}
   <nav class="navbar navbar-default" role="navigation">
     <div class="container">      <!-- Brand and toggle get grouped for better mobile display -->
@@ -73,6 +89,7 @@
           </li>
           <li><a href="/rules/">Rules</a></li>
           <li><a href="/waiverorder">Waiver Order</a></li>
+          <li><a href="/transactions/">Transactions</a></li>
         </ul>
         <form role="search" class="navbar-form navbar-right">
           <div class="form-group">
@@ -88,7 +105,7 @@
   {% endblock %}
 
   {% block footer %}
-  <footer class="row">
+  <footer class="row" id="footer">
     <div class="panel-footer text-center">
       <p><span class="glyphicon glyphicon-copyright-mark grey"></span> Ben Miller - 2014</p>
     </div>

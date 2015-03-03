@@ -1,4 +1,4 @@
-from teampages.models import Team, Player
+from teampages.models import Team, Player, DraftPick
 
 from teampages.ODSUtil.ODSReader import ODSReader
 from pyexcel_ods import ODSWriter
@@ -6,7 +6,7 @@ from pyexcel_ods import ODSWriter
 class SheetReader():
 
 	def __init__(self, team):
-			db = ODSReader("keeperpool20142015.ods")
+			db = ODSReader("keeperpool20142015 (1).ods")
 			sheet =  db.getSheet(team.name + "'s Team")
 			self.roster = []
 			self.lineup = []
@@ -36,6 +36,12 @@ class SheetReader():
 			if player in self.lineup:
 				player.active=True
 			player.save()
+
+		for year, picks in self.picks.iteritems():
+			for pick in picks:
+				db_pick = DraftPick.textToPick(year, pick)
+				db_pick.owner = self.team
+				db_pick.save()
 
 
 class SheetWriter():

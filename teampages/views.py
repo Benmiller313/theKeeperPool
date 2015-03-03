@@ -105,6 +105,33 @@ def waiverOrder(request):
 	}
 	return render_to_response("teampages/waiver_order.html", context)
 
+def _formatTransactions(trades, pickups):
+	formatted_trades = []
+	for trade in trades:
+		formatted_trades.append({
+			"type": "Trade",
+			"date": trade.date,
+			"left_team": trade.teamA,
+			"right_team": trade.teamB,
+			"left_aq": [player.fullName() for player in trade.players_received_a.all()] + [str(pick) for pick in trade.picks_received_a.all()],
+			"right_aq": [player.fullName() for player in trade.players_received_b.all()] + [str(pick) for pick in trade.picks_received_b.all()],
+ 			})
+
+	formatted_pickups = []
+	for pickup in pickups:
+		formatted_pickups.append({
+			"type": "FA Pickup",
+			"date": pickup.date,
+			"left_team": pickup.team, 
+			"right_team": pickup.team,
+			"left_aq": [pickup.player_added.fullName()],
+			"right_aq": [pickup.player_dropped.fullName()],
+			})
+
+
+	transaction_list = sorted(formatted_pickups + formatted_trades, key=lambda trans: trans["date"], reverse=True)
+	return transaction_list
+
 
 def playerpage(request, player_id):
 	player = get_object_or_404(Player, id=player_id)
@@ -113,7 +140,7 @@ def playerpage(request, player_id):
 	trades = Trade.objects.filter(Q(players_received_a=player) | Q(players_received_b=player))
 	pickups = FAPickup.objects.filter(Q(player_added=player) | Q(player_dropped=player))
 
-	transaction_list = sorted(list(trades)+list(pickups), key=lambda trans: trans.date, reverse=True)
+	transaction_list = _formatTransactions(trades, pickups)
 
 
 	context={
@@ -123,6 +150,25 @@ def playerpage(request, player_id):
 	}
 
 	return render_to_response("teampages/playerpage.html", context)
+
+
+def transactions(request):
+	teams = list(Team.objects.all().order_by('name'))
+
+	trades = Trade.objects.all().order_by('-date')
+	pickups = FAPickup.objects.all().order_by('-date')
+
+
+	transaction_list = _formatTransactions(trades, pickups)
+
+	context = {
+		"transaction_list": transaction_list,
+		"teams":teams,
+	}
+
+	return render_to_response("teampages/transactions.html", context)
+
+
 
 
 

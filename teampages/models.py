@@ -61,6 +61,22 @@ class DraftPick(models.Model):
 	def __unicode__(self):
 		return self.original_owner.name + "'s " + str(self.year) + " round " + str(self.round) 
 
+	@staticmethod
+	def textToPick(year, text):
+		try:
+			[owner, pick] = text.split(" ")
+			owner = owner.split("'")[0]
+
+			pick = int(pick[0])
+		except:
+			raise Exception("Could not parse pick: " + text)
+
+		try:
+			return DraftPick.objects.get(year=year, original_owner__name=owner, round=pick)
+		except:
+			raise Exception("Pick " + text + " does not exist")
+
+
 class FAPickup(models.Model):
 	team = models.ForeignKey(Team)
 	player = models.CharField(max_length=256)
