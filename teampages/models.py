@@ -113,10 +113,10 @@ class FAPickup(models.Model):
 class Trade(models.Model):
 	teamA = models.ForeignKey(Team, related_name="teamA")
 	teamB = models.ForeignKey(Team, related_name="teamB")
-	players_received_a = models.ManyToManyField(Player, related_name="players_received_a")
-	players_received_b = models.ManyToManyField(Player, related_name="players_received_b")
-	picks_received_a = models.ManyToManyField(DraftPick, related_name="picks_received_a")
-	picks_received_b = models.ManyToManyField(DraftPick, related_name="picks_received_b")
+	players_received_a = models.ManyToManyField(Player, related_name="players_received_a", blank=True)
+	players_received_b = models.ManyToManyField(Player, related_name="players_received_b", blank=True)
+	picks_received_a = models.ManyToManyField(DraftPick, related_name="picks_received_a", blank=True)
+	picks_received_b = models.ManyToManyField(DraftPick, related_name="picks_received_b", blank=True)
 	date = models.DateTimeField()
 
 
