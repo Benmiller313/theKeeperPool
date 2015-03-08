@@ -1,0 +1,32 @@
+{% extends 'teampages/base.html' %}
+{% block static_links %}
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/bootstrap/css/bootstrap.min.css' %}">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'teampages/bootstrap/js/bootstrap.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/transfers.css' %}">
+{% endblock %}
+
+{% block main_content %}
+    <div class="container"> 
+    	<div class="page-header">
+    		<h1>Draft Results</h1>
+    	</div>
+
+        {% for draft in drafts %}
+        <h3>{{draft.name}}</h3>
+        <div class="row draftlist">
+            <div class="col-md-3">
+                {% for pick in draft.draftpick_set.all %}
+                <span class="pickrow">{{pick.pick_number}}. {{pick.owner.name}} {% if pick.owner != pick.original_owner %} <span class="via">(via {{pick.original_owner.name}})</span>{%endif%}: <span class="pickplayername">{{pick.player.fullName}}</span></span> 
+                {% endfor %}
+
+            </div>
+        </div>
+
+
+        {% endfor %}
+    </div>
+
+{% endblock %}

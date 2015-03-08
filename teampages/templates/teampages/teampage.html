@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/base.css' %}">
 {% endblock %}
 {% block main_content %}
+{% load humanize %}
     <div class="container"> 
     	<div class="page-header">
     		<h1>{{team.name}}'s Team</h1>
@@ -23,40 +24,72 @@
 							<th class="col-md-2">Salary</th>
 							</tr>
 						</thead>
-            {% for pos, players in roster.iteritems %}
+            <tbody>
+            {% for pos, players in roster.players.iteritems %}
               {% for player in players %}
                 {% if forloop.first %}
                   <td class="position-cell" align="middle" rowspan="{{players|length}}">{{pos}}</td>
                 {% endif %}
-                </td><td >{{player.fullName}}</td><td >{{player.salary}}</td>
+                </td><td >{{player.fullName}}</td><td >${{player.salary | intcomma}}</td>
                 </tr>
               {%endfor%}
             {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td>Salary:</td>
+                <td>${{roster.salary | intcomma}}</td>
+              </tr>
+              {% for pos, players in roster.players.iteritems %}
+              <tr>
+                <td></td>
+                <td>{{pos}}</td>
+                <td>{{players | length}}</td>
+              </tr>
+              {%endfor%}
+            </tfoot>
+
     			</table>
 			</div>
 			<div class="col-md-1">
 			</div>
 			<div class="col-md-5">
-    			<h3>Lineup</h3>
-    			<table class="table">
+  			<h3>Lineup</h3>
+  			<table class="table">
 					<thead>
 						<tr>
 							<th class="col-md-1">Position</th>
 							<th class="col-md-2">Player</th>
 							<th class="col-md-2">Salary</th>
-							</tr>
-						</thead>
-				    {% for pos, players in lineup.iteritems %}
+						</tr>
+					</thead>
+          <tbody>
+				    {% for pos, players in lineup.players.iteritems %}
               {% for player in players %}
                 {% if forloop.first %}
                   <td class="position-cell" align="middle" rowspan="{{players|length}}">{{pos}}</td>
                 {% endif %}
-                </td><td >{{player.fullName}}</td><td >{{player.salary}}</td>
+                </td><td >{{player.fullName}}</td><td >${{player.salary | intcomma}}</td>
                 </tr>
               {%endfor%}
             {% endfor %}
-    			</table>
-			</div>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td>Salary:</td>
+              <td>${{lineup.salary | intcomma}}</td>
+            </tr>
+            {% for pos, players in lineup.players.iteritems %}
+              <tr>
+                <td></td>
+                <td>{{pos}}</td>
+                <td>{{players | length}}</td>
+              </tr>
+              {%endfor%}
+          </tfoot>
+  			</table>
     	</div>
     </div>
     <div class="container">

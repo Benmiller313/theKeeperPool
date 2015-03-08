@@ -36,3 +36,20 @@
 	display: block;
 	font-size: 20px;
 }
+
+.pickrow { 
+	display: block;	
+}
+
+.via { 
+	font-weight: 200;
+	font-style: italic;
+}
+
+.pickplayername { 
+	font-weight: 800;
+}
+
+.draftlist { 
+	margin-left: 10px;
+}

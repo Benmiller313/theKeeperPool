@@ -2,10 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.utils import timezone
 from django import forms
-from django.db.models import Q
+from django.db.models import Q, Sum
 from ajax_select.fields import AutoCompleteSelectField
 
-from teampages.models import Team, Banner, FAPickup, Player, Trade, DraftPick
+from teampages.models import Team, Banner, FAPickup, Player, Trade, DraftPick, Draft
 import math
 from datetime import datetime, MINYEAR
 
@@ -46,22 +46,31 @@ def teampage(request, team_name):
 	picks_template = "teampages/teams/picks/"+team_name+".html"
 
 
+	drafts = Draft.objects.filter(finished=False)
+	picks = {draft.year : DraftPick.objects.filter(owner=team, draft=draft) for draft in drafts}
+
 	context = {	
 		"team": team,
 		"teams": teams,
 		"banners": sorted(banners.iteritems(), reverse=True),
 		"roster": {
-			"F": Player.objects.filter(owner=team, position="F"),
-			"D": Player.objects.filter(owner=team, position="D"),
-			"G": Player.objects.filter(owner=team, position="G"),
+			"players": {
+				"F": Player.objects.filter(owner=team, position="F"),
+				"D": Player.objects.filter(owner=team, position="D"),
+				"G": Player.objects.filter(owner=team, position="G"),
+			},
+			"salary": Player.objects.filter(owner=team).aggregate(Sum('salary'))["salary__sum"]
+
 		},
 		"lineup": {
-			"F": Player.objects.filter(owner=team, position="F", active=True),
-			"D": Player.objects.filter(owner=team, position="D", active=True),
-			"G": Player.objects.filter(owner=team, position="G", active=True),
+			"players" : {
+				"F": Player.objects.filter(owner=team, position="F", active=True),
+				"D": Player.objects.filter(owner=team, position="D", active=True),
+				"G": Player.objects.filter(owner=team, position="G", active=True),
+			},
+			"salary": Player.objects.filter(owner=team, active=True).aggregate(Sum('salary'))["salary__sum"]
 		},
-		"picks": {year:DraftPick.objects.filter(owner=team, year=year) for year in 
-			[pick["year"] for pick in DraftPick.objects.all().values('year').distinct()]},
+		"picks": picks,
 		"roster_template": roster_template,
 		"lineup_template": lineup_template,
 		"picks_template": picks_template,
@@ -105,7 +114,7 @@ def waiverOrder(request):
 	}
 	return render_to_response("teampages/waiver_order.html", context)
 
-def _formatTransactions(trades, pickups):
+def _formatTransactions(trades, pickups, draftpicks):
 	formatted_trades = []
 	for trade in trades:
 		formatted_trades.append({
@@ -128,8 +137,12 @@ def _formatTransactions(trades, pickups):
 			"right_aq": [pickup.player_dropped.fullName()],
 			})
 
+	if draftpicks:
+		draftpicks = [{"type":"Drafted", "date": pick.draft.date, "pick":pick} for pick in draftpicks]
+	else:
+		draftpicks = []
 
-	transaction_list = sorted(formatted_pickups + formatted_trades, key=lambda trans: trans["date"], reverse=True)
+	transaction_list = sorted(formatted_pickups + formatted_trades + draftpicks, key=lambda trans: trans["date"], reverse=True)
 	return transaction_list
 
 
@@ -139,8 +152,9 @@ def playerpage(request, player_id):
 
 	trades = Trade.objects.filter(Q(players_received_a=player) | Q(players_received_b=player))
 	pickups = FAPickup.objects.filter(Q(player_added=player) | Q(player_dropped=player))
+	draftpicks = DraftPick.objects.filter(player=player)
 
-	transaction_list = _formatTransactions(trades, pickups)
+	transaction_list = _formatTransactions(trades, pickups, draftpicks)
 
 
 	context={
@@ -159,7 +173,8 @@ def transactions(request):
 	pickups = FAPickup.objects.all().order_by('-date')
 
 
-	transaction_list = _formatTransactions(trades, pickups)
+
+	transaction_list = _formatTransactions(trades, pickups, None)
 
 	context = {
 		"transaction_list": transaction_list,
@@ -168,7 +183,16 @@ def transactions(request):
 
 	return render_to_response("teampages/transactions.html", context)
 
+def drafts(request):
+	teams = list(Team.objects.all().order_by('name'))
 
+	drafts = Draft.objects.filter(finished=True).order_by("-date")
 
+	context = { 
+		"teams":teams, 
+		"drafts": drafts,
+	}
+
+	return render_to_response("teampages/drafts.html", context)
 
 

@@ -50,16 +50,37 @@ class Player(models.Model):
 	def fullName(self):
 		return self.last_name + ', ' + self.first_name
 
+class Draft(models.Model):
+	name = models.CharField(max_length=256)
+	year = models.IntegerField()
+	teams = models.ManyToManyField(Team, through='DraftOrder')
+	date = models.DateTimeField(null=True, blank=True)
+	finished = models.BooleanField(default=False)
+
+	def __unicode__(self):
+		return self.name
+
+
+class DraftOrder(models.Model):
+	team = models.ForeignKey(Team)
+	draft = models.ForeignKey(Draft)
+	order = models.IntegerField()
+
 
 class DraftPick(models.Model):
-	year = models.IntegerField()
+	draft = models.ForeignKey(Draft)
+	pick_number = models.IntegerField(null=True, blank=True)
 	round = models.IntegerField()
 	owner = models.ForeignKey(Team, related_name="current_picks")
 	original_owner = models.ForeignKey(Team, related_name="original_picks")
-	player = models.ForeignKey(Player, null=True)
+	player = models.ForeignKey(Player, null=True, blank=True)
+
+	class Meta:
+		ordering = ["pick_number"]
+
 
 	def __unicode__(self):
-		return self.original_owner.name + "'s " + str(self.year) + " round " + str(self.round) 
+		return self.original_owner.name + "'s " + str(self.draft.year) + " round " + str(self.round) 
 
 	@staticmethod
 	def textToPick(year, text):
@@ -72,7 +93,7 @@ class DraftPick(models.Model):
 			raise Exception("Could not parse pick: " + text)
 
 		try:
-			return DraftPick.objects.get(year=year, original_owner__name=owner, round=pick)
+			return DraftPick.objects.get(draft__year=year, original_owner__name=owner, round=pick)
 		except:
 			raise Exception("Pick " + text + " does not exist")
 
