@@ -101,8 +101,8 @@ class DraftPick(models.Model):
 class FAPickup(models.Model):
 	team = models.ForeignKey(Team)
 	player = models.CharField(max_length=256)
-	player_added = models.ForeignKey(Player,related_name="player_added")
-	player_dropped = models.ForeignKey(Player, related_name="player_dropped")
+	player_added = models.ForeignKey(Player,related_name="player_added", blank=True)
+	player_dropped = models.ForeignKey(Player, related_name="player_dropped", blank=True)
 	injured = models.BooleanField()
 	date = models.DateTimeField()
 
