@@ -133,8 +133,8 @@ def _formatTransactions(trades, pickups, draftpicks):
 			"date": pickup.date,
 			"left_team": pickup.team, 
 			"right_team": pickup.team,
-			"left_aq": [pickup.player_added.fullName()],
-			"right_aq": [pickup.player_dropped.fullName()],
+			"left_aq": [pickup.player_added.fullName()] if pickup.player_dropped else None,
+			"right_aq": [pickup.player_dropped.fullName()] if pickup.player_dropped else None,
 			})
 
 	if draftpicks:
