@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'teampages',
     'south',
     'ajax_select',
+    'django_tables2',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -164,3 +165,10 @@ AJAX_LOOKUP_CHANNELS = {
 
 AJAX_SELECT_INLINES = 'inline'
 AJAX_SELECT_BOOTSTRAP = True
+
+import django.conf.global_settings as DEFAULT_SETTINGS
+
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.core.context_processors.request',
+)
+

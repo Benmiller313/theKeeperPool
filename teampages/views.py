@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, render
 from django.utils import timezone
 from django import forms
 from django.db.models import Q, Sum
@@ -194,5 +194,26 @@ def drafts(request):
 	}
 
 	return render_to_response("teampages/drafts.html", context)
+
+player_cache = Player.objects.all()
+
+def playerlist(request):
+	teams = list(Team.objects.all().order_by('name'))
+	players = player_cache
+	context = {
+		"teams":teams,
+		"players": players,
+
+	}
+
+	return render(request, "teampages/playerlist.html", context)
+
+
+
+
+
+
+
+
 
 
