@@ -4,6 +4,7 @@ from django.utils import timezone
 from django import forms
 from django.db.models import Q, Sum
 from ajax_select.fields import AutoCompleteSelectField
+import django_tables2 as tables
 
 from teampages.models import Team, Banner, FAPickup, Player, Trade, DraftPick, Draft
 import math
@@ -195,14 +196,32 @@ def drafts(request):
 
 	return render_to_response("teampages/drafts.html", context)
 
-player_cache = Player.objects.all()
+
+class playerTable(tables.Table):
+	class Meta:
+		model = Player
+		exclude = ("id", "in_waivers")
+		attrs = {"class": "paleblue"}
+
+def _filterPlayers(request):
+	players = Player.objects.all()
+	if request.GET.get("filter_position"):
+		players = players.filter(position=request.GET.get("filter_position"))
+	if request.GET.get("filter_owned"):
+		if request.GET.get("filter_owned") == "FA":
+			players = players.filter(owner=None)
+		elif request.GET.get("filter_owned") == "Owned":
+			players = players.exclude(owner=None)
+	return players
+
 
 def playerlist(request):
 	teams = list(Team.objects.all().order_by('name'))
-	players = player_cache
+	table = playerTable(_filterPlayers(request))
+	tables.RequestConfig(request).configure(table)
 	context = {
 		"teams":teams,
-		"players": players,
+		"table" : table
 
 	}
 

@@ -27,3 +27,13 @@ h4.stat {
 	margin-bottom: 40px;
 
 }
+.filters {
+	margin: 20px;
+}
+.filters > div { 
+	margin: 5px;
+}
+
+.filters > button { 
+	margin-left: 10px; 
+}

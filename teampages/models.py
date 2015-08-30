@@ -35,14 +35,14 @@ class Banner(models.Model):
 
 class Player(models.Model):
 	id = models.IntegerField(primary_key=True)
-	first_name = models.CharField(max_length=100)
-	last_name = models.CharField(max_length=100)
-	position = models.CharField(max_length=2)
-	salary = models.IntegerField()
-	nhl_team = models.CharField(max_length=4)
-	owner = models.ForeignKey(Team, null=True, blank=True, default = None)
-	active = models.BooleanField(default=False)
-	in_waivers = models.BooleanField(default=False)
+	first_name = models.CharField(max_length=100, verbose_name="First name")
+	last_name = models.CharField(max_length=100, verbose_name="Last name")
+	position = models.CharField(max_length=2, verbose_name="Position")
+	salary = models.IntegerField(verbose_name="Salary")
+	nhl_team = models.CharField(max_length=4, verbose_name="NHL team")
+	owner = models.ForeignKey(Team, null=True, blank=True, default = None, verbose_name="Owner")
+	active = models.BooleanField(default=False, verbose_name="Active")
+	in_waivers = models.BooleanField(default=False, verbose_name="In waivers")
 
 	def __unicode__(self):
 		return self.first_name + ' ' + self.last_name + '\n' + self.nhl_team + '\n' + self.position + '\n' + unicode(self.salary) + '\n'

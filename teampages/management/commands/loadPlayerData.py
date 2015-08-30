@@ -27,17 +27,33 @@ def get_all_players():
 			nameCell = row.find('td', 'team-cell')
 			if nameCell and row.td.a.has_key('title') and check_if_real_player(row):	#if this is a player row
 				player = Player()
+				try:
+					id_match = re.match(r'/player_stats/(\d+)-', row.td.a['href'])
+					player.id = id_match.group(1)
+					try:
+						existing = Player.objects.get(pk=player.id)
+						#update existing
+						name = nameCell.a.string.split(',')
+						existing.first_name = name[1].strip()
+						existing.last_name = name[0].strip()
+						existing.position = parse_player_link_title(row.td.a['title'], name)[0]
+						existing.salary = get_player_salary(row)
+						existing.nhl_team = team
+						existing.save()
 
-				id_match = re.match(r'/player_stats/(\d+)-', row.td.a['href'])
-				player.id = id_match.group(1)
-				name = nameCell.a.string.split(',')
-				player.first_name = name[1].strip()
-				player.last_name = name[0].strip()
-				player.position = parse_player_link_title(row.td.a['title'], name)[0]
-				player.salary = get_player_salary(row)
-				player.nhl_team = team
-				#print player
-				player.save()
+					except:
+						#new player
+						name = nameCell.a.string.split(',')
+						player.first_name = name[1].strip()
+						player.last_name = name[0].strip()
+						player.position = parse_player_link_title(row.td.a['title'], name)[0]
+						player.salary = get_player_salary(row)
+						player.nhl_team = team
+						player.save()
+						print "Added",player.last_name
+				except:
+					print nameCell 
+				
 def get_team_from_url(url):
 	#print url
 	team = re.search('/teams/(.*)', url).group(1)
@@ -69,5 +85,5 @@ class Command(BaseCommand):
 	help = 'Reload the player database'
 
 	def handle(self, *args, **options):
-		Player.objects.all().delete()
+		#Player.objects.all().delete()
 		get_all_players()
