@@ -134,7 +134,7 @@ def _formatTransactions(trades, pickups, draftpicks):
 			"date": pickup.date,
 			"left_team": pickup.team, 
 			"right_team": pickup.team,
-			"left_aq": [pickup.player_added.fullName()] if pickup.player_dropped else None,
+			"left_aq": [pickup.player_added.fullName()] if pickup.player_added else None,
 			"right_aq": [pickup.player_dropped.fullName()] if pickup.player_dropped else None,
 			})
 
@@ -150,8 +150,7 @@ def _formatTransactions(trades, pickups, draftpicks):
 def playerpage(request, player_id):
 	player = get_object_or_404(Player, id=player_id)
 	teams = list(Team.objects.all().order_by('name'))
-
-	trades = Trade.objects.filter(Q(players_received_a=player) | Q(players_received_b=player))
+	trades = list(Trade.objects.filter(players_received_a=player)) +  list(Trade.objects.filter(players_received_b=player))
 	pickups = FAPickup.objects.filter(Q(player_added=player) | Q(player_dropped=player))
 	draftpicks = DraftPick.objects.filter(player=player)
 
