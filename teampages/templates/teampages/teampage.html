@@ -25,15 +25,27 @@
 							</tr>
 						</thead>
             <tbody>
-            {% for pos, players in roster.players.iteritems %}
-              {% for player in players %}
-                {% if forloop.first %}
-                  <td class="position-cell" align="middle" rowspan="{{players|length}}">{{pos}}</td>
-                {% endif %}
-                </td><td >{{player.fullName}}</td><td >${{player.salary | intcomma}}</td>
-                </tr>
-              {%endfor%}
-            {% endfor %}
+            {% for player in roster.players.F %}
+              {% if forloop.first %}
+                <td class="position-cell" align="middle" rowspan="{{roster.players.F|length}}">F</td>
+              {% endif %}
+              </td><td >{{player.fullName}}</td><td >${{player.salary | intcomma}}</td>
+              </tr>
+            {%endfor%}
+            {% for player in roster.players.D %}
+              {% if forloop.first %}
+                <td class="position-cell" align="middle" rowspan="{{roster.players.D|length}}">D</td>
+              {% endif %}
+              </td><td >{{player.fullName}}</td><td >${{player.salary | intcomma}}</td>
+              </tr>
+            {%endfor%}
+            {% for player in roster.players.G %}
+              {% if forloop.first %}
+                <td class="position-cell" align="middle" rowspan="{{roster.players.G|length}}">G</td>
+              {% endif %}
+              </td><td >{{player.fullName}}</td><td >${{player.salary | intcomma}}</td>
+              </tr>
+            {%endfor%}
             </tbody>
             <tfoot>
               <tr>
@@ -65,15 +77,27 @@
 						</tr>
 					</thead>
           <tbody>
-				    {% for pos, players in lineup.players.iteritems %}
-              {% for player in players %}
-                {% if forloop.first %}
-                  <td class="position-cell" align="middle" rowspan="{{players|length}}">{{pos}}</td>
-                {% endif %}
-                </td><td >{{player.fullName}}</td><td >${{player.salary | intcomma}}</td>
-                </tr>
-              {%endfor%}
-            {% endfor %}
+            {% for player in lineup.players.F %}
+              {% if forloop.first %}
+                <td class="position-cell" align="middle" rowspan="{{lineup.players.F|length}}">F</td>
+              {% endif %}
+              </td><td >{{player.fullName}}</td><td >${{player.salary | intcomma}}</td>
+              </tr>
+            {%endfor%}
+            {% for player in lineup.players.D %}
+              {% if forloop.first %}
+                <td class="position-cell" align="middle" rowspan="{{lineup.players.D|length}}">D</td>
+              {% endif %}
+              </td><td >{{player.fullName}}</td><td >${{player.salary | intcomma}}</td>
+              </tr>
+            {%endfor%}
+            {% for player in lineup.players.G %}
+              {% if forloop.first %}
+                <td class="position-cell" align="middle" rowspan="{{lineup.players.G|length}}">G</td>
+              {% endif %}
+              </td><td >{{player.fullName}}</td><td >${{player.salary | intcomma}}</td>
+              </tr>
+            {%endfor%}
           </tbody>
           <tfoot>
             <tr>
