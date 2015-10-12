@@ -14,10 +14,13 @@ class Command(BaseCommand):
 		except:
 			print"Must enter a year"
 			return
-		draft = Draft(year=year, name=args[1])
-		draft.save()
+		try:
+			draft = Draft.objects.get(year=year, name=args[1])
+		except:	
+			draft = Draft(year=year, name=args[1])
+			draft.save()
 		teams = Team.objects.all()
-		rounds = 7
+		rounds = 5
 		for team in teams:
 			for round in range(1, rounds+1):
 				if not DraftPick.objects.filter(draft__year=year, round=round, original_owner=team).exists():

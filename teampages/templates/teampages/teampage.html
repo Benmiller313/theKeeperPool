@@ -125,7 +125,7 @@
         <table class="table">
         <tbody>
         <tr>
-        <td class="position-cell" align="middle" rowspan="8">{{year}}</td>
+        <td class="position-cell" align="middle" rowspan="{{years_picks|length}}">{{year}}</td>
         {% for pick in years_picks %}
           <td>{{pick.original_owner.name}}'s round {{pick.round}}</td>
           </tr>

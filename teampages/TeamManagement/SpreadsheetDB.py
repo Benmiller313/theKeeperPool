@@ -5,16 +5,14 @@ from pyexcel_ods import ODSWriter
 
 class SheetReader():
 
-	def __init__(self, team):
+	def __init__(self, team, filename="keeperpool20142015 (1).ods"):
 			db = ODSReader("keeperpool20142015 (1).ods")
 			sheet =  db.getSheet(team.name + "'s Team")
 			self.roster = []
 			self.lineup = []
 			self.picks = {}
 			self.team = team
-
 			for row in sheet: 
-				print row
 				try:
 					self.roster.append(Player.objects.get(pk=row[0]))
 				except:
