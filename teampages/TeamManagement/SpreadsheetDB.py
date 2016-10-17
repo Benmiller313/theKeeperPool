@@ -3,6 +3,8 @@ from teampages.models import Team, Player, DraftPick
 from teampages.ODSUtil.ODSReader import ODSReader
 from pyexcel_ods import ODSWriter
 
+SALARY_CAP = 73.00
+
 class SheetReader():
 
 	def __init__(self, team, filename="keeperpool20142015 (1).ods"):
@@ -29,12 +31,15 @@ class SheetReader():
 	def importTeamData(self, clear=True):
 		if clear:
 			Player.objects.filter(owner=self.team).update(active=False, owner=None)
+
+		salary = 0
 		for player in self.roster:
 			player.owner=self.team
 			if player in self.lineup:
 				player.active=True
+				salary += player.salary
 			player.save()
-
+		print salary
 		for year, picks in self.picks.iteritems():
 			for pick in picks:
 				db_pick = DraftPick.textToPick(year, pick)
