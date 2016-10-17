@@ -85,7 +85,12 @@ class DraftPick(models.Model):
 	@staticmethod
 	def textToPick(year, text):
 		try:
-			[owner, pick] = text.split(" ")
+			if len(text.split(" ")) > 2:
+				[firstname, lastname, pick] = text.split(" ")
+				owner = "{} {}".format(firstname, lastname)
+			else:
+				[owner, pick] = text.split(" ")
+
 			owner = owner.split("'")[0]
 
 			pick = int(pick[0])

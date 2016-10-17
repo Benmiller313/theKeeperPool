@@ -50,7 +50,7 @@ def get_all_players():
 						player.salary = get_player_salary(row)
 						player.nhl_team = team
 						player.save()
-						print "Added",player.last_name
+						#print "Added",player.last_name
 				except:
 					print nameCell 
 				
