@@ -125,3 +125,46 @@ class Trade(models.Model):
 	date = models.DateTimeField()
 
 
+class Stat(models.Model):
+	player = models.ForeignKey(Player)
+	year = models.IntegerField(default=0)
+	season = models.CharField(choices=(("REGULAR", "Regular"), ("PLAYOFFS", "Playoffs")), max_length=255)
+	games_played = models.IntegerField(default=0)
+	points = models.IntegerField(default=0)
+	goals = models.IntegerField(default=0)
+	assists = models.IntegerField(default=0)
+	plus_minus = models.IntegerField(default=0)
+	short_handed_goals = models.IntegerField(default=0)
+	game_winning_goals = models.IntegerField(default=0)
+	wins = models.IntegerField(default=0)
+	ot_loss = models.IntegerField(default=0)
+	shutouts = models.IntegerField(default=0)
+
+	def calculate_points(self):
+		total = 0
+		if self.player.position == "F":
+			total += self.goals * 3
+			total += self.assists * 2
+			total += self.plus_minus
+			total += self.short_handed_goals * 4
+			total += self.game_winning_goals * 2
+			return total
+
+		if self.player.position == "D":
+			total += self.goals * 5
+			total += self.assists * 3
+			total += self.plus_minus
+			total += self.short_handed_goals * 4
+			total += self.game_winning_goals * 2
+			return total
+
+		if self.player.position == "G":
+			total += self.wins * 5
+			total += self.shutouts * 8
+			total += self.goals * 20
+			total += self.assists * 3
+			return total
+
+
+
+

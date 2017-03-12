@@ -32,6 +32,50 @@
 			<span>${{player.salary | intcomma}}</span>
 		</div>
 	</div>
+	<h3>Stats</h3>
+	<hr/>
+	<table class="table">
+		<thead>
+			<tr>
+				<td>Year</td>
+				<td>Season</td>
+				<td>Games Played</td>
+				{% if player.position == "G" %}
+				<td>Wins</td>
+				<td>Shutouts</td>
+				{% else %}
+				<td>Goals</td>
+				<td>Assists</td>
+				<td>Points</td>
+				<td>+/-</td>
+				<td>Short Handed Goals</td>
+				<td>Game Winning Goals</td>
+				{% endif %}
+				<td>Total Pool Points</td>
+			</tr>
+		</thead>
+		<tbody>
+				{% for stat_row in stats %}
+				<tr>
+					<td>{{ stat_row.year }}</td>
+					<td>{{ stat_row.season }}</td>
+					<td>{{ stat_row.games_played }}</td>
+					{% if player.position == "G" %}
+					<td>{{ stat_row.wins }}</td>
+					<td>{{ stat_row.shutouts }}</td>
+					{% else %}
+					<td>{{ stat_row.goals }}</td>
+					<td>{{ stat_row.assists }}</td>
+					<td>{{ stat_row.points }}</td>
+					<td>{{ stat_row.plus_minus }}</td>
+					<td>{{ stat_row.short_handed_goals }}</td>
+					<td>{{ stat_row.game_winning_goals }}</td>
+					{% endif %}
+					<td>{{ stat_row.calculate_points }}</td>
+				</tr>
+				{% endfor %}
+		</tbody>
+	</table>
 	<h3>Transaction History</h3>
 	<hr/>
 	{% for trans in transaction_list %}

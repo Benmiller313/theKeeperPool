@@ -6,7 +6,7 @@ from django.db.models import Q, Sum
 from ajax_select.fields import AutoCompleteSelectField
 import django_tables2 as tables
 
-from teampages.models import Team, Banner, FAPickup, Player, Trade, DraftPick, Draft
+from teampages.models import Team, Banner, FAPickup, Player, Trade, DraftPick, Draft, Stat
 import math
 from datetime import datetime, MINYEAR
 
@@ -156,11 +156,12 @@ def playerpage(request, player_id):
 
 	transaction_list = _formatTransactions(trades, pickups, draftpicks)
 
-
+	stats = Stat.objects.filter(player=player).order_by("-year")
 	context={
 		"teams": teams, 
 		"player":player,
 		"transaction_list":transaction_list,
+		"stats":stats,
 	}
 
 	return render_to_response("teampages/playerpage.html", context)
