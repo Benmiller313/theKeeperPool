@@ -4,3 +4,5 @@ admin
 db
 *.pyc
 /teampages/templates/teampages/teams/*
+*.DS_Store
+/old_data
