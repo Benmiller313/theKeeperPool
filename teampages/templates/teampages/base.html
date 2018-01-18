@@ -3,11 +3,66 @@
 <head>
   <title>The Keeper Pool</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   {% block static_links %}
+
   {% endblock %}
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/flick/jquery-ui.css">
+  <script type="text/javascript">
+  $(function() {
+
+    $( "#player_search").autocomplete({
+      minLength:3,
+      source: function( request, response){
+        $.ajax({
+          url: "/lookup/ajax_lookup/player", 
+          dataType: "json", 
+          data: {
+            term: request.term
+          },
+          success: function(data){
+            response(data);
+          }
+        });
+      },
+      focus : function(event, ui){
+        return false;
+      },
+      select: function(event, ui){
+        location.href="/players/" + ui.item.pk + "/";   
+        return false;
+      }
+    })
+    .autocomplete( "instance" )._renderItem = function( ul, item ) {
+      return $( "<li>" )
+      .append( item.match)
+      .appendTo( ul );
+    };
+  });
+  </script>
+  <script>
+
+    $(document).ready(function() {
+
+     var docHeight = $(window).height();
+     var footerHeight = $('#footer').height();
+     var footerTop = $('#footer').position().top + footerHeight;
+
+     if (footerTop < docHeight) {
+      $('#footer').css('margin-top', 0+ (docHeight - footerTop) + 'px');
+     }
+    });
+  </script>
+  {% block scripts%}
+  {% endblock %}
+
+
 </head>
 
 <body>
+
   {% block top_nav %}
   <nav class="navbar navbar-default" role="navigation">
     <div class="container">      <!-- Brand and toggle get grouped for better mobile display -->
@@ -31,9 +86,18 @@
               {% endfor %}
             </ul>
           </li>
+          <li><a href="/playerlist/">Player List</a></li>
           <li><a href="/rules/">Rules</a></li>
           <li><a href="/waiverorder">Waiver Order</a></li>
+          <li><a href="/transactions/">Transactions</a></li>
+          <li><a href="/drafts/">Draft Results</a></li>
         </ul>
+        <form role="search" class="navbar-form navbar-right">
+          <div class="form-group">
+            <input id="player_search" type="text" placeholder="Player Search" class="form-control">
+          </div>
+        </form>
+        <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none;"></ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
@@ -42,12 +106,11 @@
   {% endblock %}
 
   {% block footer %}
-  <footer class="row">
+  <footer class="row" id="footer">
     <div class="panel-footer text-center">
       <p><span class="glyphicon glyphicon-copyright-mark grey"></span> Ben Miller - 2014</p>
     </div>
   </footer>
   {% endblock %}
 </body>
-
 

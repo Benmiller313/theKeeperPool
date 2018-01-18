@@ -1,0 +1,1 @@
+from pyexcel_ods import ODSWriter()

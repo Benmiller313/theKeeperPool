@@ -18,7 +18,7 @@
 			<li>
 				<h3>{{team.name}}</h3> 
 				{% if pickup %}
-				<span>Last Claim: {{pickup.player}}</span><br><span> On: {{pickup.date}}</span>
+				<span>Last Claim: {{pickup.player_added.fullName}}</span><br><span> On: {{pickup.date}}</span>
 				{% endif %}
 				<hr>
 			</li>

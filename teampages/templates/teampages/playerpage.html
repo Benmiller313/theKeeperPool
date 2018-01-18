@@ -1,0 +1,128 @@
+{% extends 'teampages/base.html' %}
+
+{% block static_links %}
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/bootstrap/css/bootstrap.min.css' %}">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'teampages/bootstrap/js/bootstrap.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/transfers.css' %}">
+{% endblock %}
+{% block main_content %}
+{% load humanize %}
+<div class="container">
+	<div class="page-header">
+		<h1>{{player.fullName}}</h1>
+	</div>
+	<div class="row stats-row">
+		<div class="col-md-3">
+			<h4 class="stat">Owner:</h4>
+			<span>{{player.owner}}</span>
+		</div>
+		<div class="col-md-3">
+			<h4 class="stat">Position:</h4>
+			<span>{{player.position}}
+		</div>
+		<div class="col-md-3">
+			<h4 class="stat">NHL Affiliation:</h4>
+			<span>{{player.nhl_team}}</span>
+		</div>
+		<div class="col-md-3">
+			<h4 class="stat">Salary:</h4>
+			<span>${{player.salary | intcomma}}</span>
+		</div>
+	</div>
+	<h3>Stats</h3>
+	<hr/>
+	<table class="table">
+		<thead>
+			<tr>
+				<td>Year</td>
+				<td>Season</td>
+				<td>Games Played</td>
+				{% if player.position == "G" %}
+				<td>Wins</td>
+				<td>Shutouts</td>
+				{% else %}
+				<td>Goals</td>
+				<td>Assists</td>
+				<td>Points</td>
+				<td>+/-</td>
+				<td>Short Handed Goals</td>
+				<td>Game Winning Goals</td>
+				{% endif %}
+				<td>Total Pool Points</td>
+			</tr>
+		</thead>
+		<tbody>
+				{% for stat_row in stats %}
+				<tr>
+					<td>{{ stat_row.year }}</td>
+					<td>{{ stat_row.season }}</td>
+					<td>{{ stat_row.games_played }}</td>
+					{% if player.position == "G" %}
+					<td>{{ stat_row.wins }}</td>
+					<td>{{ stat_row.shutouts }}</td>
+					{% else %}
+					<td>{{ stat_row.goals }}</td>
+					<td>{{ stat_row.assists }}</td>
+					<td>{{ stat_row.points }}</td>
+					<td>{{ stat_row.plus_minus }}</td>
+					<td>{{ stat_row.short_handed_goals }}</td>
+					<td>{{ stat_row.game_winning_goals }}</td>
+					{% endif %}
+					<td>{{ stat_row.calculate_points }}</td>
+				</tr>
+				{% endfor %}
+		</tbody>
+	</table>
+	<h3>Transaction History</h3>
+	<hr/>
+	{% for trans in transaction_list %}
+	
+	<div class="row">
+	{% if trans.type == "Drafted" %}
+		<div class="col-md-2">
+			<span class="trans-type">{{trans.type}}</span>
+			<span class="trans-date">{{trans.date}}</span>
+		</div>
+		<div class="col-md-2">
+			<span class="trans-teamname">{{trans.pick.owner}}</span>
+			<span class="trans-verb">{{trans.pick.draft.name}}</span>
+			<span class="trans-verb">{{trans.pick.pick_number | ordinal}} Overall Selection</span>
+		</div>
+	{% else %}
+		<div class="col-md-2">
+			<span class="trans-type">{{trans.type}}</span>
+			<span class="trans-date">{{trans.date}}</span>
+		</div>
+		<div class="col-md-2">
+			<span class="trans-teamname">{{trans.left_team}}</span>
+			<span class="trans-verb">Acquires:</span>
+			{% for asset in trans.left_aq %}
+			<p>{{asset}}</p>
+			{% endfor %}
+		</div>
+		<div class="col-md-1">
+			{% if trans.type == "Trade" %}
+			<span class="glyphicon glyphicon-transfer" id="transfer"></span>
+			{% else %}
+			<span class="glyphicon glyphicon-sort" id="updown"></span>
+			{% endif %}
+		</div>
+		<div class="col-md-2">
+			<span class="trans-teamname">{{trans.right_team}}</span>
+			<span class="trans-verb">{% if trans.type == "Trade" %}Acquires:{% else %}Drops:{% endif %}</span>
+			{% for asset in trans.right_aq %}
+			<p>{{asset}}</p>
+			{% endfor %}
+		</div>
+		{% endif %}
+	</div>
+
+	<hr/>
+	{% endfor %}
+</div>
+
+{% endblock %}
+

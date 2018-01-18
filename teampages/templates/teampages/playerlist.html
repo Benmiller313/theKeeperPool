@@ -1,0 +1,121 @@
+{% extends 'teampages/base.html' %}
+{% block static_links %}
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/bootstrap/css/bootstrap.min.css' %}">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'teampages/bootstrap/js/bootstrap.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/base.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'teampages/css/transfers.css' %}">
+    <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
+    <script type="text/javascript" src="{% static 'teampages/js/URI.js' %}"></script>
+    {% load django_tables2 %}
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+var pos = "";
+var owner = "";
+$(document).ready(function() {
+    var query = window.location.search
+    if (query.indexOf("filter_position=F") != -1 ){
+        $('#posAll').removeClass('active');
+        $('#posF').addClass('active');
+        pos = "F";
+    }
+    if (query.indexOf("filter_position=D") != -1 ){
+        $('#posAll').removeClass('active');
+        $('#posD').addClass('active');
+        pos = "D";
+    }
+    if (query.indexOf("filter_position=G") != -1 ){
+        $('#posAll').removeClass('active');
+        $('#posG').addClass('active');
+        pos = "G";
+    }
+    if (query.indexOf("filter_owned=Owned") != -1 ){
+        $('#teamAll').removeClass('active');
+        $('#teamOwned').addClass('active');
+        owner = "Owned";
+    }
+    if (query.indexOf("filter_owned=FA") != -1 ){
+        $('#teamAll').removeClass('active');
+        $('#teamFa').addClass('active');
+        owner= "FA";
+    }
+
+    $('#posAll').click(function(){
+        pos = "";
+    });
+    $('#posF').click(function(){
+        pos = "F";
+    });
+    $('#posD').click(function(){
+        pos = "D";
+    });
+    $('#posG').click(function(){
+        pos = "G";
+    });
+    $('#teamAll').click(function(){
+        owner = "";
+    });
+    $('#teamOwned').click(function(){
+        owner = "Owned";
+    });
+    $('#teamFa').click(function(){
+        owner = "FA";
+    });
+
+    $('#filter_button').click(function(){
+        var uri = new URI(window.location.search);
+        uri.setSearch("filter_position", pos);
+        uri.setSearch("filter_owned", owner);
+        window.location.href = uri.search();
+    });
+});
+
+
+
+</script>
+{% endblock %}
+
+{% block main_content %}
+    <div class="container"> 
+    	<div class="page-header">
+    		<h1>Player List</h1>
+    	</div>
+        <div class="filters">
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default active" id="posAll">
+                    <input type="radio" name="positions"  autocomplete="off" checked>All
+                </label>
+                <label class="btn btn-default" id="posF">
+                    <input type="radio" name="positions"  autocomplete="off">Forward
+                </label>
+                <label class="btn btn-default" id="posD">
+                    <input type="radio" name="positions"  autocomplete="off">Defence
+                </label>
+                <label class="btn btn-default" id="posG">
+                    <input type="radio" name="positions"  autocomplete="off">Goalie
+                </label>
+            </div> 
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-default active" id="teamAll">
+                    <input type="radio" name="positions"  autocomplete="off" checked>All
+                </label>
+                <label class="btn btn-default" id="teamOwned">
+                    <input type="radio" name="positions"  autocomplete="off">Owned
+                </label>
+                <label class="btn btn-default" id="teamFa">
+                    <input type="radio" name="positions"  autocomplete="off">Free Agent
+                </label>
+            </div> 
+            <button id="filter_button" type="button" class="btn btn-primary">Filter</button>
+
+
+
+        </div>
+        {% render_table table %}
+    </div>
+
+{% endblock %}

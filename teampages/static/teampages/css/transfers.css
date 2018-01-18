@@ -1,0 +1,55 @@
+#transfer {
+	font-size: 20px;
+	margin-top: 20px;
+}
+
+#updown { 
+	transform: scaleX(-1);
+	-moz-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	-ms-transform: scaleX(-1);
+	font-size: 18px;
+	margin-top: 20px;
+}
+
+.trans-verb {
+	display: block;
+	font-style: italic;
+	font-weight: 200;
+	margin-bottom: 10px;
+}
+
+.trans-teamname {
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.trans-date {
+	display: block;
+	font-style: italic;
+	font-weight: 200;
+	margin-bottom: 10px;
+}
+
+.trans-type { 
+	display: block;
+	font-size: 20px;
+}
+
+.pickrow { 
+	display: block;	
+}
+
+.via { 
+	font-weight: 200;
+	font-style: italic;
+}
+
+.pickplayername { 
+	font-weight: 800;
+}
+
+.draftlist { 
+	margin-left: 10px;
+}
