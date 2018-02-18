@@ -1,0 +1,35 @@
+URL_ROOT = 'https://statsapi.web.nhl.com'
+
+
+TEAM_IDS = {
+    'BOS': 6,
+    'BUF': 7,
+    'DET': 17,
+    'FLO': 13,
+    'MTL': 8,
+    'OTT': 9,
+    'TBL': 14,
+    'TOR': 10,
+    'CAR': 12,
+    'CBJ': 29,
+    'NJD': 1,
+    'NYI': 2,
+    'NYR': 3,
+    'PHI': 4,
+    'PIT': 5,
+    'WSH': 15,
+    'CHI': 16,
+    'COL': 21,
+    'DAL': 25,
+    'MIN': 30,
+    'NSH': 18,
+    'STL': 19,
+    'WPG': 52,
+    'ANA': 24,
+    'ARI': 53,
+    'CGY': 20,
+    'EDM': 22,
+    'LAK': 26,
+    'SJS': 28,
+    'VAN': 23
+}
